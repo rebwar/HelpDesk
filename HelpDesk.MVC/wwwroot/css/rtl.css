@@ -1,0 +1,273 @@
+@font-face {
+font-family: Vazir;
+src: url('../fonts/eot/Vazir.eot');
+src: url('../fonts/eot/Vazir.eot?#iefix') format('embedded-opentype'),
+	 url('../fonts/woff2/Vazir.woff2') format('woff2'),
+	 url('../fonts/woff/Vazir.woff') format('woff'),
+	 url('../fonts/ttf/Vazir.ttf') format('truetype');
+font-weight: normal;
+}
+
+@font-face {
+font-family: Vazir;
+src: url('../fonts/eot/Vazir-Bold.eot');
+src: url('../fonts/eot/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+	 url('../fonts/woff2/Vazir-Bold.woff2') format('woff2'),
+	 url('../fonts/woff/Vazir-Bold.woff') format('woff'),
+	 url('../fonts/ttf/Vazir-Bold.ttf') format('truetype');
+font-weight: bold;
+}
+
+@font-face {
+font-family: Vazir;
+src: url('../fonts/eot/Vazir-Light.eot');
+src: url('../fonts/eot/Vazir-Light.eot?#iefix') format('embedded-opentype'),
+	 url('../fonts/woff2/Vazir-Light.woff2') format('woff2'),
+	 url('../fonts/woff/Vazir-Light.woff') format('woff'),
+	 url('../fonts/ttf/Vazir-Light.ttf') format('truetype');
+font-weight: 300;
+}
+
+@font-face {
+font-family: Vazir;
+src: url('../fonts/eot/Vazir-Medium.eot');
+src: url('../fonts/eot/Vazir-Medium.eot?#iefix') format('embedded-opentype'),
+	 url('../fonts/woff2/Vazir-Medium.woff2') format('woff2'),
+	 url('../fonts/woff/Vazir-Medium.woff') format('woff'),
+	 url('../fonts/ttf/Vazir-Medium.ttf') format('truetype');
+font-weight: 500;
+}
+
+@font-face {
+font-family: Vazir;
+src: url('../fonts/eot/Vazir-Thin.eot');
+src: url('../fonts/eot/Vazir-Thin.eot?#iefix') format('embedded-opentype'),
+	 url('../fonts/woff2/Vazir-Thin.woff2') format('woff2'),
+	 url('../fonts/woff/Vazir-Thin.woff') format('woff'),
+	 url('../fonts/ttf/Vazir-Thin.ttf') format('truetype');
+font-weight: 100;
+}
+html,body{
+	direction: rtl;
+	font-family: 'Vazir', sans-serif;
+}
+body {
+    text-align: right;
+    background: #fff -webkit-linear-gradient(top, #E8F8F5 0%, #EFFEFF 61.2%, rgba(255,255,255,0) 100%) no-repeat 50% 0;
+    background: #fff linear-gradient(180deg, #E8F8F5 0%, #EFFEFF 61.2%, rgba(255,255,255,0) 100%) no-repeat 50% 0;
+    background-size: 100% 385px;
+}
+.main-banner-content{
+	text-align: right;
+}
+.single-box.with-line::before {
+	right: auto;
+	left:-90px;
+}
+.testimonials-item i{
+	right: auto;
+	left: 28px;
+}
+.newsletter form .btn{
+	right: auto;
+	left: 7px;
+}
+.single-footer .contact-info li i{
+	right: 0px;
+}
+.single-footer .contact-info li{
+	padding-right:25px;
+	padding-left: auto;
+}
+.ColorSwitcher{
+	left: auto;
+	right: -162px;
+}
+.ColorSwitcher__control{
+	left: 0;
+	right: 100%;
+	border-radius: 3px 0 0 3px;
+	box-shadow: -5px 0 7px rgba(0,0,0,.15);
+}
+.ColorSwitcher--open{
+	right:0;
+}
+.creative-bg{
+	right: auto;
+	left:0;
+	border-radius: 0 100% 0 0;
+}
+.creative-bg-two{
+	right: auto;
+	left:0;
+	border-radius:0 0 100% 0;
+}
+
+.contact-box .icon{
+	left: auto;
+	right: 20px;
+}
+.contact-box{
+	padding: 20px 90px 20px 20px;
+}
+.s130 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-family: 'Vazir', sans-serif;
+    margin-bottom:130px;
+}
+
+    .s130 .form {
+        width: 100%;
+        max-width: 790px;
+    }
+
+        .s130 .form .inner-form {
+            display: -ms-flexbox;
+            display: flex;
+            width: 100%;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+            -ms-flex-align: center;
+            align-items: center;
+            box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 34px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+            .s130 .form .inner-form .input-field {
+                height: 68px;
+            }
+
+                .s130 .form .inner-form .input-field input {
+                    height: 100%;
+                    background: transparent;
+                    border: 0;
+                    display: block;
+                    width: 100%;
+                    padding: 10px 0;
+                    font-size: 16px;
+                    color: #000;
+                }
+
+                    .s130 .form .inner-form .input-field input.placeholder {
+                        color: #222;
+                        font-size: 16px;
+                    }
+
+                    .s130 .form .inner-form .input-field input:-moz-placeholder {
+                        color: #222;
+                        font-size: 16px;
+                    }
+
+                    .s130 .form .inner-form .input-field input::-webkit-input-placeholder {
+                        color: #222;
+                        font-size: 16px;
+                    }
+
+                    .s130 .form .inner-form .input-field input:hover, .s130 form .inner-form .input-field input:focus {
+                        box-shadow: none;
+                        outline: 0;
+                    }
+
+                .s130 .form .inner-form .input-field.first-wrap {
+                    -ms-flex-positive: 1;
+                    flex-grow: 1;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    background: #d9f1e3;
+                }
+
+                    .s130 .form .inner-form .input-field.first-wrap input {
+                        -ms-flex-positive: 1;
+                        flex-grow: 1;
+                    }
+
+                    .s130 .form .inner-form .input-field.first-wrap .svg-wrapper {
+                        min-width: 80px;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                    }
+
+                    .s130 .form .inner-form .input-field.first-wrap svg {
+                        width: 36px;
+                        height: 36px;
+                        fill: #222;
+                    }
+
+                .s130 .form .inner-form .input-field.second-wrap {
+                    min-width: 216px;
+                }
+
+                    .s130 .form .inner-form .input-field.second-wrap .btn-search {
+                        height: 100%;
+                        width: 100%;
+                        white-space: nowrap;
+                        font-size: 16px;
+                        color: #fff;
+                        border: 0;
+                        cursor: pointer;
+                        position: relative;
+                        z-index: 0;
+                        background: #00ad5f;
+                        transition: all .2s ease-out, color .2s ease-out;
+                        font-weight: 300;
+                    }
+
+                        .s130 .form .inner-form .input-field.second-wrap .btn-search:hover {
+                            background: #009451;
+                        }
+
+                        .s130 .form .inner-form .input-field.second-wrap .btn-search:focus {
+                            outline: 0;
+                            box-shadow: none;
+                        }
+
+        .s130 .form .info {
+            font-size: 15px;
+            color: #ccc;
+            padding-left: 26px;
+        }
+
+@media screen and (max-width: 992px) {
+    .s130 .form .inner-form .input-field {
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .s130 .form .inner-form .input-field.first-wrap .svg-wrapper {
+        min-width: 40px;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    .s130 .form .inner-form .input-field.first-wrap svg {
+        width: 26px;
+        height: 26px;
+        fill: #222;
+    }
+
+    .s130 .form .inner-form .input-field.second-wrap {
+        min-width: 100px;
+    }
+
+        .s130 .form .inner-form .input-field.second-wrap .btn-search {
+            font-size: 13px;
+        }
+}
+

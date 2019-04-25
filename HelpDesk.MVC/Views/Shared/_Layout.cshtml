@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Animate Min CSS -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- IcoFont CSS -->
+    <link rel="stylesheet" href="~/css/icofont.min.css">
+    <!-- Owl Carousel CSS -->
+    @*<link rel="stylesheet" href="assets/css/owl.carousel.css">*@
+    <!-- Owl Theme Default CSS -->
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <!-- Magnific Popup CSS -->
+    @*<link rel="stylesheet" href="assets/css/magnific-popup.css">*@
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- Default Color CSS -->
+    <link rel="stylesheet" href="~/css/color/color-default.css">
+    <!-- Color Switcher CSS -->
+    @*<link rel="stylesheet" href="assets/dist/color-switcher.css">*@
+    <!-- RTL CSS -->
+    <link rel="stylesheet" href="~/css/rtl.css">
+    @RenderSection("autocomplete_css", false)
+
+    <title>Pars Help Desk سیستم پشتیبانی شرکت پارس</title>
+</head>
+<body>
+    @Html.Partial("_NavBar")
+    <partial name="_CookieConsentPartial" />
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    @Html.Partial("_Footer")
+    <!-- End Footer Area -->
+
+    <div class="go-top"><i class="icofont-stylish-up"></i></div>
+    <script src="~/js/jquery.min.js"></script>
+    <!-- Popper Min JS -->
+    <script src="~/js/popper.min.js"></script>
+    <!-- Bootstrap Min JS -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/extention/choices.js"></script>
+    @RenderSection("autocomplete_JS",false)
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

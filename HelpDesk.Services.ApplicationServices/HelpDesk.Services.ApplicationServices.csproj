@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelpDesk.Domain.Contracts\HelpDesk.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\HelpDesk.Domain.Core\HelpDesk.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

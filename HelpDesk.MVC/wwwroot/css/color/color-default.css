@@ -1,0 +1,190 @@
+a {
+    color: #506CEA;
+}
+.bg-gray {
+	background-color: #edf5ff;
+}
+.section-title span {
+	color: #506CEA;
+}
+.section-title h3::before {
+	background: #506CEA;
+}
+.owl-theme .owl-nav [class*="owl-"] {
+	color: #506CEA;
+}
+.owl-theme .owl-nav [class*="owl-"]:hover {
+	background: #506CEA;
+}
+.btn-primary {
+	background-color: #506CEA;
+	border-color: #506CEA;
+}
+.btn-primary.disabled, .btn-primary:disabled {
+	background-color: #506CEA;
+	border-color: #506CEA;
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+	background-color: #6993ff;
+	border-color: #6993ff;
+}
+.btn-primary:hover {
+	background-color: #6993ff;
+	border-color: #6993ff;
+}
+.double-bounce1, .double-bounce2 {
+	background-color: #506CEA;
+}
+.navbar-brand span {
+	color: #506CEA;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+	color: #506CEA;
+}
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+	color: #506CEA;
+}
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link {
+	color: #506CEA;
+}
+.creative-bg {
+	background: #506CEA;
+}
+.creative-bg-two {
+	background: #506CEA;
+}
+.single-features:hover {
+    background: #506CEA;
+}
+.single-features i {
+	color: #506CEA;
+}
+.about-content ul li i {
+    color: #506CEA;
+}
+.about-text ul li i {
+    color: #506CEA;
+}
+.about-text span {
+	background: rgba(88, 130, 253, .8);
+}
+.about-text .blockquote {
+	background: rgba(88, 130, 253, .4);
+}
+.single-services:hover {
+    background: #148F77;
+}
+.single-services i {
+    background: #1ABC9C;
+}
+.single-services:hover i {
+	color: #506CEA;
+}
+.tabs a:hover i, .tabs .current a i {
+    background: #506CEA;
+}
+.tabs_item_content ul li i {
+	color: #506CEA;
+}
+.tabs a:hover, .tabs .current a {
+    color: #506CEA;
+}
+.funfacts-area::before {
+	background: #506CEA;
+}
+.funFact i {
+	color: #506CEA;
+}
+.fun-fact i {
+	color: #506CEA;
+}
+.single-box:hover span {
+    background: #506CEA;
+}
+.our-team .social li a {
+    color: #506CEA;
+}
+.our-team .social li a:hover {
+    background: #506CEA;
+}
+.single-team .pic::after {
+	border: 2px solid #506CEA;
+}
+.single-team .social-links li a:hover {
+	background: #506CEA;
+	border-color: #506CEA;
+}
+.single-team .team-content {
+	border-top: 2px solid #506CEA;
+}
+.testimonials-item:hover {
+    background: #506CEA;
+}
+.client-info .client-title span {
+    color: #506CEA;
+}
+.accordion .accordion-title {
+    background: #506CEA;
+}
+.pricingTable .title {
+    background: #506CEA;
+}
+.pricingTable:hover .price-value {
+    background: #506CEA;
+}
+.pricing-table:hover .icon {
+	background: #506CEA;
+}
+.pricing-table .pricing-table-header {
+	background: #506CEA;
+}
+.pricing-table .icon {
+	color: #506CEA;
+}
+.partner-area .owl-item img {
+	border: 1px solid #506CEA;
+}
+.subscribe-area {
+    background: #506CEA;
+}
+.newsletter h4 span {
+    color: #506CEA;
+}
+.page-title {
+    background: #506CEA;
+}
+.contact-box .icon {
+	border: 1px dashed #506CEA;
+	color: #506CEA;
+}
+.contact-box:hover .icon {
+	background: #506CEA;
+}
+.contact-box .content p a:hover {
+	color: #506CEA;
+}
+.single-footer .logo a span {
+	color: #506CEA;
+}
+.single-footer ul li a:hover {
+	color: #506CEA;
+}
+.single-footer .contact-info li i {
+	color: #506CEA;
+}
+.copyright-area ul li a {
+	border: 1px solid #506CEA;
+}
+.copyright-area ul li a:hover {
+	background: #506CEA;
+    border-color: #506CEA;
+}
+.go-top:hover {
+	background: #506CEA;
+}
+.navbar-light .navbar-toggler {
+	border-color: #5882fd;
+}
+.navbar-light .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(88, 130, 253, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
