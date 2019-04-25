@@ -29,4 +29,9 @@
     <ProjectReference Include="..\HelpDesk.Services.ApplicationServices\HelpDesk.Services.ApplicationServices.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Admin\" />
+  </ItemGroup>
+
 </Project>
