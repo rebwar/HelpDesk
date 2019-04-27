@@ -36,15 +36,16 @@
                     <li class="active">صفحه</li>
                 </ol>
             </section>
-
             @RenderBody()
+
         </div>
+
         @Html.Partial("_Footer")
-        @Html.Partial("_LeftSideBar")
     </div>
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/Admin/js/adminlte.js"></script>
-
+    <script src="~/vendor/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>
