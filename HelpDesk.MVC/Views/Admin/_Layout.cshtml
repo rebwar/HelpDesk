@@ -20,32 +20,35 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @RenderSection("Modal_Style", false)
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         @Html.Partial("_Header")
         @Html.Partial("_RightSideBar")
         <div class="content-wrapper">
-            <section class="content-header">
-                <h1>
-                    عنوان صفحه
-                    <small>توضیحات</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
-                    <li class="active">صفحه</li>
-                </ol>
-            </section>
             @RenderBody()
 
         </div>
 
         @Html.Partial("_Footer")
     </div>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/Admin/js/adminlte.js"></script>
+
+    <script src="~/Admin/js/jquery.min.js"></script>
+
+    <script src="~/Admin/js/bootstrap.min.js"></script>
+
+    <script src="~/Admin/js/fastclick.js"></script>
+
+    <script src="~/Admin/js/adminlte.min.js"></script>
+
     <script src="~/vendor/jquery-validation/dist/jquery.validate.js"></script>
+
     <script src="~/vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/delete.js"></script>
+    @RenderSection("Details_Modal", false)
+    @RenderSection("Edit_Modal", false)
+
+
 </body>
 </html>

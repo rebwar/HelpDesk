@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HelpDesk.Domain.Core.Categories.Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/delete.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>TestDelete</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger delete" data-id="@item.Id" data-controller="Admin" data-action="delete" data-body-message="برای حذف این گروه مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

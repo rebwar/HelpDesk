@@ -37,20 +37,60 @@ namespace HelpDesk.MVC.Controllers
                 };
                 categoryRepository.Add(category);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ListCat));
         }
         public IActionResult ListCat()
         {
-              
-            return View(categoryRepository.GetAll().ToList());
+            var cat = categoryRepository.GetAll().ToList();
+            return View(cat);
         }
         public IActionResult EditCategory(int id)
         {
             return View();
         }
-        public IActionResult DeleteCategory(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var cat = categoryRepository.Get(id);
+                categoryRepository.Delete(cat);
+                return Ok();
+            }
+            catch (Exception exp)
+            {
+                return BadRequest();
+            }
         }
+        public ActionResult Details(int Id)
+        {
+            ViewBag.type = 1;
+            var cat = categoryRepository.Get(Id);
+            if (cat == null)
+            {
+                return BadRequest();
+            }
+            return PartialView("Details", cat);
+
+        }
+        public ActionResult Edit(int Id)
+        {
+            var cat = categoryRepository.Get(Id);
+            if (cat == null)
+            {
+                return BadRequest();
+            }
+            return View(cat);
+
+        }
+        [HttpPost]
+        public ActionResult Edit(Category category)
+        {
+            categoryRepository.Update(category);
+           return RedirectToAction(nameof(ListCat));
+            
+
+        }
+
+
     }
 }

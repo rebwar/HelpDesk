@@ -10,8 +10,9 @@ namespace HelpDesk.Domain.Contracts.Common
     {
         TEntity Get(int id);
         IQueryable<TEntity> GetAll();
-        void Delete(int id);
+        void Delete(TEntity entity);
         TEntity Add(TEntity entity);
+        void Update(TEntity entity);
         //IQueryable<TEntity> Search(TEntity entity);
 
     }

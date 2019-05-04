@@ -22,14 +22,17 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
             _dbcontext.SaveChanges();
             return entity;
         }
-
-        public void Delete(int id)
+        public void Update(TEntity entity)
         {
-            TEntity entity = new TEntity
-            {
-                Id = id
-            };
-            _dbcontext.Remove(id);
+            _dbcontext.Entry<TEntity>(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _dbcontext.SaveChanges();
+            
+        }
+
+        public void Delete(TEntity entity)
+        {
+            
+            _dbcontext.Remove(entity);
             _dbcontext.SaveChanges();
         }
 
@@ -46,6 +49,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
         {
             return _dbcontext.Set<TEntity>().AsQueryable();
         }
-        
+
+
     }
 }

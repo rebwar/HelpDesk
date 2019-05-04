@@ -1,0 +1,55 @@
+﻿@model HelpDesk.Domain.Core.Categories.Category
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        <small>ویرایش گروه @Model.Name</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+        <li class="active">ویرایش گروه</li>
+    </ol>
+</section>
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> ویرایش گروه</h3>
+                </div>
+
+                <form asp-action="Edit">
+                    <div class="box-body">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">نام گروه</label>
+                            <input asp-for="Name" class="form-control input-lg" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label">توضیحات</label>
+                            <textarea asp-for="Description" class="form-control text-body" maxlength="200" rows="5" ></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="box-footer">
+                            <input type="submit" value="افزودن" class="btn btn-block btn-success btn-lg" />
+                        </div>
+                        </div>
+                </form>
+            </div>
+            
+        </div>
+        </div>
+
+    <div>
+        <a asp-action="ListCat">بازگشت به لیست</a>
+    </div>
+    </section>
+

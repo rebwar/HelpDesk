@@ -1,11 +1,20 @@
-﻿@model HelpDesk.Domain.Core.Categories.Category
+﻿@model HelpDesk.MVC.Models.categories.AddNewCategory
 
 @{
-    ViewData["Title"] = "AddCategory";
+    ViewData["Title"] = "گروه جدید";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 
-<hr />
+<section class="content-header">
+    <h1>
+        <small>درج گروه جدید</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-action="Index" asp-controller="Admin" ><i class="fa fa-dashboard"></i> داشبورد</a></li>
+        <li class="active">گروه جدید</li>
+    </ol>
+</section>
+
 <section class="content">
     <div class="row">
         <!-- left column -->
@@ -18,18 +27,18 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                <form asp-action="AddCategory" asp-controller="Admin">
-                    <div asp-validation-summary="All"></div>
+                <form asp-action="AddCategory" method="post" asp-controller="Admin">
+
                     <div class="box-body">
 
                         <div class="form-group">
                             <label asp-for="Name" class="control-label">نام گروه</label>
-                            <input asp-for="Name" class="form-control input-lg" maxlength="100"/>
+                            <input asp-for="Name" class="form-control input-lg" maxlength="100" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Description" class="control-label">توضیحات</label>
-                            <textarea asp-for="Description" class="form-control tex" maxlength="200" rows="5"></textarea>
+                            <textarea asp-for="Description" class="form-control input-lg text-body" maxlength="200" rows="5"></textarea>
 
                         </div>
                     </div>
@@ -40,7 +49,8 @@
                     </div>
                 </form>
             </div>
-            </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
