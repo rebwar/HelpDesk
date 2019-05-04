@@ -99,11 +99,11 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(500);
+                        .HasMaxLength(200);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(150);
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
