@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HelpDesk.Domain.Core.Categories.Category>
+
+@{
+    ViewData["Title"] = "ListCat";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> لیست گروهها</h3>
+                    </div>
+                    <br />
+
+                    <p>
+                        <a asp-action="AddCategory" class="btn  btn-success btn-lg">ایجاد گروه</a>
+                    </p>
+                    <div class="box-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        نام گروه
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-app" asp-action="EditCategory" asp-route-id="@item.Id"><i class="fa fa-edit"></i> ویرایش</a> 
+                                            <a class="btn btn-app" asp-action="DetailsCategory" asp-route-id="@item.Id"><i class="fa fa-list"></i> جزئیات</a> 
+                                            <a class="btn btn-app" asp-action="DeleteCategory" asp-route-id="@item.Id"><i class="fa fa-remove"></i> حذف</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>

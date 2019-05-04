@@ -39,7 +39,12 @@ namespace HelpDesk.MVC.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult EditCaegory(int id)
+        public IActionResult ListCat()
+        {
+              
+            return View(categoryRepository.GetAll().ToList());
+        }
+        public IActionResult EditCategory(int id)
         {
             return View();
         }
