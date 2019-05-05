@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using HelpDesk.Domain.Contracts.Articles;
 using HelpDesk.Domain.Contracts.Categories;
@@ -12,6 +13,7 @@ using HelpDesk.MVC.Models.Articles;
 using HelpDesk.MVC.Models.categories;
 using MD.PersianDateTime;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace HelpDesk.MVC.Controllers
 {
@@ -121,7 +123,7 @@ namespace HelpDesk.MVC.Controllers
                     Status = ArticleStatus.Publish,
                     CategoryId=model.SelectedCat
                 };
-                if (model?.Image?.Length > 0)
+                if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType=="image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
                 {
                     using (var ms = new MemoryStream())
                     {
@@ -134,5 +136,51 @@ namespace HelpDesk.MVC.Controllers
             }
             return RedirectToAction(nameof(ListArticle));
         }
+        public IActionResult DeleteArticle(int id)
+        {
+            try
+            {
+                var cat = articleRepository.Get(id);
+                articleRepository.Delete(cat);
+                return Ok();
+            }
+            catch (Exception exp)
+            {
+                return BadRequest();
+            }
+        }
+        public IActionResult EditArticle(int Id)
+        {
+            var article = articleRepository.Get(Id);
+            if (article == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                DisplayArticleCategory displayArticleCategory = new DisplayArticleCategory();
+                displayArticleCategory.CatForDisplay = categoryRepository.GetAll().ToList();
+                displayArticleCategory.Abstract = article.Abstract;
+                displayArticleCategory.Body = article.Body;
+                displayArticleCategory.CategoryId = article.CategoryId;
+                displayArticleCategory.Id = article.Id;             
+                byte[] array = Encoding.ASCII.GetBytes(article.Image);
+
+                var file = File(array,"image/jpg");
+                displayArticleCategory.PublishDate = article.PublishDate;
+                displayArticleCategory.Status = article.Status;
+                displayArticleCategory.Title = article.Title;
+                return View(displayArticleCategory);
+            }
+
+        }
+        [HttpPost]
+        public IActionResult EditArticle(Article article)
+        {
+            articleRepository.Update(article);
+            return RedirectToAction(nameof(ListArticle));
+        }
+
+
     }
 }
