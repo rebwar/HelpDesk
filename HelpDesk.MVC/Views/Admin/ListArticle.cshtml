@@ -1,0 +1,83 @@
+﻿@model IEnumerable<HelpDesk.Domain.Core.Articles.Article>
+
+@{
+    ViewData["Title"] = "ListArticle";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@section Modal_Style
+{
+    <style>
+        .example-modal .modal {
+            position: relative;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            left: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .example-modal .modal {
+            background: transparent !important;
+        }
+    </style>
+
+}
+<section class="content">
+    <div class="row">
+
+
+
+
+
+        <!-- left column -->
+        <div class="col-md-11">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> لیست مطالب</h3>
+                </div>
+                <br />
+
+                <p style="padding-right:15px">
+                    <a asp-action="AddArticle" class="btn btn-success btn-lg justify-content-center">مطلب جدید</a>
+                </p>
+                <div class="box-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    تیتر مطلب
+                                </th>
+                                <th>
+                                   تاریخ انتشار
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PublishDate)
+                                </td>
+
+                                <td>
+                                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
+                                    <a class="btn btn-danger delete" data-id="@item.Id" data-controller="Admin" data-action="delete" data-body-message="برای حذف این گروه مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

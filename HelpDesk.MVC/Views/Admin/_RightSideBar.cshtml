@@ -16,16 +16,6 @@
         </div>
 
         <!-- search form (Optional) -->
-        <div action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="جستجو">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </span>
-            </div>
-        </div>
         <!-- /.search form -->
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -41,25 +31,22 @@
                 <ul class="treeview-menu">
                     <li><a asp-action="AddCategory">  افزودن</a></li>
                     <li><a asp-action="ListCat">  ویرایش</a></li>
-                    <li><a href="#">  حذف</a></li>
-
                 </ul>
             </li>
-            
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>مدیریت گروه مقالات</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span> مدیریت  مقالات</span></a></li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-link"></i> <span>چند سطحی</span>
+                    <i class="fa fa-link"></i> <span>مدیریت مقالات</span>
                     <span class="pull-left-container">
                         <i class="fa fa-angle-right pull-left"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">لینک سطح ۱</a></li>
-                    <li><a href="#">لینک سطح ۱</a></li>
+                    <li><a asp-action="AddArticle">افزودن</a></li>
+                    <li><a asp-action="ListArticle"> ویرایش</a></li>
                 </ul>
             </li>
+
+            <li><a href="#"><i class="fa fa-link"></i> <span> مدیریت  مقالات</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

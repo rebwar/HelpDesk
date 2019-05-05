@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HelpDesk.Domain.Contracts.Articles;
 using HelpDesk.Domain.Contracts.Categories;
+using HelpDesk.InfraStructures.DataAccess.Articles;
 using HelpDesk.InfraStructures.DataAccess.Categories;
 using HelpDesk.InfraStructures.DataAccess.Common;
 using Microsoft.AspNetCore.Builder;
@@ -39,7 +41,9 @@ namespace HelpDesk.MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HelpDeskContext>(c => c.UseSqlServer(Configuration.GetConnectionString("HelpDesk")));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

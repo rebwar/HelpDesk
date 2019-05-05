@@ -11,7 +11,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
         public HelpDeskContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<HelpDeskContext>();
-            builder.UseSqlServer(@"Server=.;Initial Catalog=HelpDesk;Integrated security=true");
+            builder.UseSqlServer(@"Server=(localdb)\ProjectsV13;Initial Catalog=HelpDesk;Integrated security=true");
             return new HelpDeskContext(builder.Options);
         }
     }
