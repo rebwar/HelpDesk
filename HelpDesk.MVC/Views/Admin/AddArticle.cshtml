@@ -5,8 +5,8 @@
 }
 @section text_editor
 {
-<link href="~/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
-<link href="~/css/select2.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link href="~/css/select2.min.css" rel="stylesheet" />
 }
 <section class="content-header">
     <h1>
@@ -44,7 +44,7 @@
                             <select class="form-control input-sm" name="SelectedCat">
                                 @foreach (var item in Model.CatForDisplay)
                                 {
-                                <option class="input-sm" value="@item.Id">@item.Name</option>
+                                    <option class="input-sm" value="@item.Id">@item.Name</option>
                                 }
                             </select>
                         </div>
@@ -56,9 +56,11 @@
                         </div>
                         <div class="box-body pad">
                             <textarea asp-for="Body" class="form-control input-lg text-body" id="mytextarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-
+متن خود را بنویسید
                             </textarea>
+
                         </div>
+
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="Image">ارسال عکس</label>
@@ -81,19 +83,19 @@
 
 </section>
 @section Tiny_Mce{
-<script src="~/vendor/tinymce/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea#mytextarea',
-        plugins: 'advlist autolink link lists preview table code pagebreak',
-        menubar: false,
-        language: 'fa',
-        height: 300,
-        relative_urls: false,
-        toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
-    });
+    <script src="~/vendor/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#mytextarea',
+            plugins: 'advlist autolink link lists preview table code pagebreak',
+            menubar: false,
+            language: 'fa',
+            height: 300,
+            relative_urls: false,
+            toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
+        });
 
-</script>
+    </script>
 
 
 }

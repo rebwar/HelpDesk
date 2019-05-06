@@ -176,16 +176,21 @@ namespace HelpDesk.MVC.Controllers
             }
         }
         [HttpPost]
-        public IActionResult EditArticle(Article article,DisplayArticleCategory displayArticle)
+        public async Task<IActionResult> EditArticle(AddNewArticleGetViewModel displayArticle)
         {
+            Article article = new Article();
+            
+            article.CategoryId = displayArticle.SelectedCat;
             if ((displayArticle?.Image?.Length > 0) && ((displayArticle?.Image?.ContentType == "image/jpeg") || (displayArticle?.Image?.ContentType == "image/jpg")))
             {
+
                 articleRepository.Update(article);
                 return RedirectToAction(nameof(ListArticle));
 
             }
             else
             {
+                
                 article.Image = displayArticle.ImagePath;
                 articleRepository.Update(article);
                 return RedirectToAction(nameof(ListArticle));

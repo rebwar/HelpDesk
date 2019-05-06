@@ -1,4 +1,4 @@
-﻿@model HelpDesk.MVC.Models.Articles.DisplayArticleCategory;
+﻿@model HelpDesk.MVC.Models.Articles.DisplayArticleCategory
 
 @{
     ViewData["Title"] = Model.Title;
@@ -59,7 +59,6 @@
                         <div class="form-group">
                             <img class="img-bordered-sm  profile-user-img" src="@Model.ImagePath" asp-append-version="true" />
                             <input hidden asp-for="ImagePath" />
-                            <input hidden asp-for="Image" />
                             <input hidden asp-for="PublishDate" />
 
 
