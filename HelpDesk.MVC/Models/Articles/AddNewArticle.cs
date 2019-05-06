@@ -23,6 +23,7 @@ namespace HelpDesk.MVC.Models.Articles
         [StringLength(60, ErrorMessage = "حداکثر طول رشته تاریخ نباید از 60 کاراکتر بیشتر باشد")]
         public string PublishDate { get; set; }
         public ArticleStatus Status { get; set; }
+        public string ImagePath { get; set; }
         public int CategoryId { get; set; }
     }
     public class DisplayArticleCategory:AddNewArticle

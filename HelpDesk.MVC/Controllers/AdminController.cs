@@ -12,6 +12,7 @@ using HelpDesk.InfraStructures.DataAccess.Common;
 using HelpDesk.MVC.Models.Articles;
 using HelpDesk.MVC.Models.categories;
 using MD.PersianDateTime;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -21,11 +22,13 @@ namespace HelpDesk.MVC.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IArticleRepository articleRepository;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public AdminController(ICategoryRepository categoryRepository, IArticleRepository articleRepository)
+        public AdminController(ICategoryRepository categoryRepository, IArticleRepository articleRepository,IHostingEnvironment hostingEnvironment)
         {
             this.categoryRepository = categoryRepository;
             this.articleRepository = articleRepository;
+            this._hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -109,7 +112,7 @@ namespace HelpDesk.MVC.Controllers
             return View(cat);
         }
         [HttpPost]
-        public IActionResult AddArticle(AddNewArticleGetViewModel model)
+        public async Task<IActionResult> AddArticle(AddNewArticleGetViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -125,12 +128,13 @@ namespace HelpDesk.MVC.Controllers
                 };
                 if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType=="image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
                 {
-                    using (var ms = new MemoryStream())
+                    string path_root = _hostingEnvironment.WebRootPath;
+                    string path_to_image = path_root + "\\Images\\" + model.Image.FileName;
+                    using (var stream = new FileStream(path_to_image, FileMode.Create))
                     {
-                        model.Image.CopyTo(ms);
-                        var fileBytes = ms.ToArray();
-                        article.Image = Convert.ToBase64String(fileBytes);
+                        await model.Image.CopyToAsync(stream);
                     }
+                    article.Image = @"~/images/" + model.Image.FileName;
                 }
                 articleRepository.Add(article);
             }
@@ -163,24 +167,30 @@ namespace HelpDesk.MVC.Controllers
                 displayArticleCategory.Abstract = article.Abstract;
                 displayArticleCategory.Body = article.Body;
                 displayArticleCategory.CategoryId = article.CategoryId;
-                displayArticleCategory.Id = article.Id;             
-                byte[] array = Encoding.ASCII.GetBytes(article.Image);
-
-                var file = File(array,"image/jpg");
+                displayArticleCategory.Id = article.Id;
+                displayArticleCategory.ImagePath = article.Image;
                 displayArticleCategory.PublishDate = article.PublishDate;
                 displayArticleCategory.Status = article.Status;
                 displayArticleCategory.Title = article.Title;
                 return View(displayArticleCategory);
             }
-
         }
         [HttpPost]
-        public IActionResult EditArticle(Article article)
+        public IActionResult EditArticle(Article article,DisplayArticleCategory displayArticle)
         {
-            articleRepository.Update(article);
-            return RedirectToAction(nameof(ListArticle));
+            if ((displayArticle?.Image?.Length > 0) && ((displayArticle?.Image?.ContentType == "image/jpeg") || (displayArticle?.Image?.ContentType == "image/jpg")))
+            {
+                articleRepository.Update(article);
+                return RedirectToAction(nameof(ListArticle));
+
+            }
+            else
+            {
+                article.Image = displayArticle.ImagePath;
+                articleRepository.Update(article);
+                return RedirectToAction(nameof(ListArticle));
+
+            }
         }
-
-
     }
 }

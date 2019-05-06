@@ -57,6 +57,16 @@
                             </textarea>
                         </div>
                         <div class="form-group">
+                            <img class="img-bordered-sm  profile-user-img" src="@Model.ImagePath" asp-append-version="true" />
+                            <input hidden asp-for="ImagePath" />
+                            <input hidden asp-for="Image" />
+                            <input hidden asp-for="PublishDate" />
+
+
+                        </div>
+
+
+                        <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="Image">ارسال عکس</label>
                                 <input type="file" asp-for="Image" class="form-control-" />
@@ -65,7 +75,6 @@
                         <div class="box-footer">
                             <input type="submit" value="ویرایش" class="btn btn-block btn-success btn-lg" />
                         </div>
-
 
                     </div>
                 </form>
@@ -76,20 +85,21 @@
 
     <div>
         <a class="btn btn-info" asp-action="ListCat">بازگشت به لیست</a>
+
     </div>
 </section>
 @section Tiny_Mce{
     <script src="~/vendor/tinymce/tinymce.min.js"></script>
     <script>
-    tinymce.init({
-        selector: 'textarea#mytextarea',
-        plugins: 'advlist autolink link lists preview table code pagebreak',
-        menubar: false,
-        language: 'fa',
-        height: 300,
-        relative_urls: false,
-        toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
-    });
+        tinymce.init({
+            selector: 'textarea#mytextarea',
+            plugins: 'advlist autolink link lists preview table code pagebreak',
+            menubar: false,
+            language: 'fa',
+            height: 300,
+            relative_urls: false,
+            toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
+        });
 
     </script>
 
