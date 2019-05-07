@@ -40,12 +40,12 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
         {
             return _dbcontext.Set<TEntity>().Find(id);
         }
-        //public IQueryable<TEntity> Search(TEntity entity)
-        //{
-        //    return _dbcontext.Set<TEntity>().AsQueryable();
-        //}
+        public IQueryable<TEntity> Search(string term)
+        {
+            return _dbcontext.Set<TEntity>().AsQueryable();
+        }
 
-        public  IQueryable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll()
         {
             return _dbcontext.Set<TEntity>().AsQueryable();
         }

@@ -19,6 +19,7 @@
   color: #555;
   float: none;
   padding: 6px 12px;
+  width:100%;
 }
 .easy-autocomplete input:hover, .easy-autocomplete input:focus {
   box-shadow: none;
@@ -245,9 +246,9 @@
 .easy-autocomplete-container {
   right: 0;
   position: fixed;
-  width: 48%;
+  width: inherit;
   z-index: 2;
-  margin-right:200px;
+  margin-right:230px;
   margin-top:10px;
 }
 .easy-autocomplete-container ul {

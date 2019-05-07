@@ -93,19 +93,14 @@
         var options = {
 
             url: function (search) {
-                return "/Test/SearchCategory";
+                return "/Test/SearchArticle";
             },
 
             getValue: function (element) {
-                return element.name;
+                return element.title;
             },
 
-            template: {
-                type: "description",
-                fields: {
-                    description: "name"
-                }
-            },
+
 
             list: {
                 match: {

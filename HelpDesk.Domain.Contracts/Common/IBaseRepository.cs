@@ -13,7 +13,7 @@ namespace HelpDesk.Domain.Contracts.Common
         void Delete(TEntity entity);
         TEntity Add(TEntity entity);
         void Update(TEntity entity);
-        //IQueryable<TEntity> Search(TEntity entity);
+        IQueryable<TEntity> Search(string term);
 
     }
 }

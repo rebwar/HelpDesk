@@ -8,5 +8,6 @@ namespace HelpDesk.Domain.Contracts.Articles
 {
    public interface IArticleRepository: IBaseRepository<Article>
     {
+
     }
 }
