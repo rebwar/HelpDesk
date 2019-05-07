@@ -6,6 +6,7 @@ namespace HelpDesk.Domain.Core.Articles
 {
    public enum ArticleStatus
     {
+        PrePublish,
         Publish,
         Draft,
         Delete

@@ -176,26 +176,49 @@ namespace HelpDesk.MVC.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> EditArticle(AddNewArticleGetViewModel displayArticle)
+        public async Task<IActionResult> EditArticle(AddNewArticleGetViewModel displayArticle, Article article)
         {
-            Article article = new Article();
-            
+            var oldImagePath = displayArticle.ImagePath.Remove(0,9);
             article.CategoryId = displayArticle.SelectedCat;
             if ((displayArticle?.Image?.Length > 0) && ((displayArticle?.Image?.ContentType == "image/jpeg") || (displayArticle?.Image?.ContentType == "image/jpg")))
             {
+                string path_root = _hostingEnvironment.WebRootPath;
+                string path_Old_Image = path_root + "\\Images\\" + oldImagePath;
+                string path_to_image = path_root + "\\Images\\" + displayArticle.Image.FileName;
+                using (var stream = new FileStream(path_to_image, FileMode.Create))
+                {
+                    await displayArticle.Image.CopyToAsync(stream);
+                }
+                article.Image = @"~/images/" + displayArticle.Image.FileName;
+                System.IO.File.Delete(path_Old_Image);
 
                 articleRepository.Update(article);
                 return RedirectToAction(nameof(ListArticle));
-
             }
             else
             {
-                
                 article.Image = displayArticle.ImagePath;
                 articleRepository.Update(article);
                 return RedirectToAction(nameof(ListArticle));
 
             }
+        }
+        public IActionResult ArticleDetails(int id)
+        {
+            var article = articleRepository.Get(id);
+            
+            if (article == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Category category = new Category();
+                category= categoryRepository.Get(article.CategoryId);
+                ViewData["Category"] = category.Name;
+                return View(article);
+            }
+
         }
     }
 }

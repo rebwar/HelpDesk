@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -40,10 +41,10 @@ namespace HelpDesk.MVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HelpDeskContext>(c => c.UseSqlServer(Configuration.GetConnectionString("HelpDesk")));
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<HelpDeskContext>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IArticleRepository, ArticleRepository>();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +64,7 @@ namespace HelpDesk.MVC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

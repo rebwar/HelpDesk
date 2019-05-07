@@ -7,7 +7,6 @@
 @section text_editor
 {
     <link href="~/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
-    <link href="~/css/select2.min.css" rel="stylesheet" />
 }
 
 <section class="content-header">
@@ -28,7 +27,7 @@
                     <h3 class="box-title"> ویرایش مطلب</h3>
                 </div>
 
-                <form asp-action="EditArticle">
+                <form asp-action="EditArticle" method="post" asp-controller="Admin" enctype="multipart/form-data">
                     <div class="box-body">
 
                         <div class="form-group">
@@ -41,7 +40,7 @@
                             <select class="form-control input-sm" name="SelectedCat">
                                 @foreach (var item in Model.CatForDisplay)
                                 {
-                                    <option class="input-sm" value="@item.Id">@item.Name</option>
+                                    <option class="input-sm"  value="@item.Id">@item.Name</option>
                                 }
                             </select>
                         </div>
@@ -83,7 +82,7 @@
     </div>
 
     <div>
-        <a class="btn btn-info" asp-action="ListCat">بازگشت به لیست</a>
+        <a class="btn btn-info" asp-action="ListArticle">بازگشت به لیست</a>
 
     </div>
 </section>

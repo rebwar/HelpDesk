@@ -67,6 +67,8 @@
                                 </td>
 
                                 <td>
+                                    <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-edit"></i>جزئیات </a>
+
                                     <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
                                     <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
                                 </td>

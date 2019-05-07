@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HelpDesk.Domain.Core.Articles.Article>
+@{
+    ViewData["Title"] = "SearchResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="services" class="services-area ptb-100">
+    <div class="container">
+        @foreach (var item in Model)
+        {
+
+            <a asp-action="SearchDetail" asp-route-id="@item.Id" asp-controller="Test" data-id="@item.Id" style="text-decoration:none">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="single-services text-right">
+                            <i class="icofont-ruler-pencil"></i>
+                            <h3>@item.Title</h3>
+                            <p>@item.Abstract </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                </a>
+                }
+        </div>
+</section>
+

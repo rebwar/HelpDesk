@@ -27,6 +27,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     b.Property<string>("Abstract")
                         .HasMaxLength(1000);
 
+                    b.Property<string>("AspNetUsersId");
+
                     b.Property<string>("Body")
                         .IsRequired();
 
@@ -35,6 +37,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     b.Property<string>("Image")
                         .IsRequired()
                         .IsUnicode(false);
+
+                    b.Property<string>("PDF");
 
                     b.Property<string>("PublishDate")
                         .IsRequired()

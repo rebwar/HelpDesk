@@ -15,6 +15,8 @@ namespace HelpDesk.Domain.Core.Articles
         public List<ArticleComment> Comments { get; set; }
         public ArticleStatus Status { get; set; }
         public int CategoryId { get; set; }
+        public string PDF { get; set; }
+        public string AspNetUsersId { get; set; }
 
     }
 }

@@ -35,5 +35,19 @@ namespace HelpDesk.MVC.Controllers
         {
             return articleRepository.Search(search).ToList();
         }
+        [Route("test/searchresult/{term?}")]
+
+        public IActionResult SearchResult(string term="")
+        {
+
+            var article = articleRepository.Search(term).ToList();
+            return View(article);
+        }
+        public IActionResult SearchDetail(int id)
+        {
+            var model = articleRepository.Get(id);
+            return View(model);
+        }
+
     }
 }

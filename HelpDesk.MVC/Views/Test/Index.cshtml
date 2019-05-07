@@ -1,4 +1,4 @@
-﻿
+﻿@model HelpDesk.Domain.Core.Articles.Article
 @{
     ViewData["Title"] = "Index";
 }
@@ -13,79 +13,81 @@
 
 <section id="services" class="services-area ptb-100">
     <div class="container">
-        <div class="section-title">
-            @*<span>خدمات</span>
-                <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
-            <div class="s130">
-                <div class="form">
-                    <div class="inner-form">
-                        <div class="input-field first-wrap">
-                            <div class="svg-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                                </svg>
+        <form method="post" asp-action="SearchResult" asp-controller="Test">
+            <div class="section-title">
+                @*<span>خدمات</span>
+            <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
+            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
+                <div class="s130">
+                    <div class="form">
+                        <div class="inner-form">
+                            <div class="input-field first-wrap">
+                                <div class="svg-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                                    </svg>
+                                </div>
+                                <input name="term" id="search" type="text" placeholder=" متن مورد جستجو  را وارد کنید" />
                             </div>
-                            <input id="search" type="text" placeholder=" متن مورد جستجو  را وارد کنید" />
-                        </div>
-                        <div class="input-field second-wrap">
-                            <button class="btn-search" type="button">جستجو</button>
+                            <div class="input-field second-wrap">
+                                <button class="btn-search" type="submit">جستجو</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-ruler-pencil"></i>
+                        <h3>نرم افزار</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-ruler-pencil"></i>
-                    <h3>نرم افزار</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-laptop-alt"></i>
+                        <h3>سخت افزار</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-data"></i>
+                        <h3>سامانه ها</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-ssl-security"></i>
+                        <h3>امنیت </h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-globe-alt"></i>
+                        <h3>شبکه</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-services text-center">
+                        <i class="icofont-support"></i>
+                        <h3>متفرقه</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-laptop-alt"></i>
-                    <h3>سخت افزار</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-data"></i>
-                    <h3>سامانه ها</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-ssl-security"></i>
-                    <h3>امنیت </h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-globe-alt"></i>
-                    <h3>شبکه</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="single-services text-center">
-                    <i class="icofont-support"></i>
-                    <h3>متفرقه</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </section>
 @section Scripts{
