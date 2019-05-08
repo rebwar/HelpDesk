@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelpDesk.InfraStructures.DataAccess.Migrations
 {
     [DbContext(typeof(HelpDeskContext))]
-    [Migration("13980217154348_init")]
+    [Migration("20190508030737_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

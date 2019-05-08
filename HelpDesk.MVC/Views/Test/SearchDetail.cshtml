@@ -3,30 +3,79 @@
     ViewData["Title"] = "SearchDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Article_Detail_css
+{
+    <link href="~/Admin/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Admin/css/AdminLTE.css" rel="stylesheet" />
+}
 
-<section class="border">
-
-
-                    <div class="col-md-10">
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title"> جزئیات مطلب</h3>
-                            </div>
-                            <div class="box-body clearfix">
-                                <div class="form-group">
-                                    <h3>@Model.Title</h3>
-                                </div>
-                                <div class="form-group">
-                                    <p>@Model.Abstract </p>
-                                   </div>
-                                <div class="form-group">
-                                        @Html.Raw(@Model.Body)
-</div>
-                                </div>
-                            </div>
-
-
+<section class="content">
+    <div class="section-title">
+        @*<span>خدمات</span>
+            <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
+            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
+        <div class="s130">
+            <div class="form">
+                <div class="inner-form">
+                    <div >
+                        <div class="svg-wrapper">
                         </div>
-    
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+
+                <div class="box-body clearfix">
+
+                    <div class="form-group">
+                        <p>@Model.Title</p>
+                    </div>
+                    <div class="form-group">
+                        <img class="img-bordered-sm" style="max-width:50%" src="@Model.Image" asp-append-version="true" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label ">تاریخ انتشار:</label>
+
+                        <label class="control-label input-lg">@Model.PublishDate</label>
+
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">گروه:</label>
+
+                        <label class="control-label input-lg">@ViewData["Category"]</label>
+                    </div>
+
+                    <div class="form-group">
+                        <blockquote class="pull-right">  <p>@Model.Abstract</p></blockquote>
+
+                    </div>
+                    <div class="box-body pad">
+                        <p>@Html.Raw(@Model.Body)</p>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </section>
+
+
+
+
 

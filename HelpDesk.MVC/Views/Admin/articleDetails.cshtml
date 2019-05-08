@@ -4,7 +4,6 @@
     ViewData["Title"] = "articleDetails";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
-
 <section class="content-header">
     <h1>
         <small>جزئیات مطلب @Model.Title</small>
@@ -30,7 +29,7 @@
                             <p>@Model.Title</p>
                         </div>
                         <div class="form-group">
-                            <img class="img-bordered-sm img-bordered-sm" src="@Model.Image" asp-append-version="true" />
+                            <img class="img-bordered-sm" style="max-width:50%" src="@Model.Image" asp-append-version="true" />
 
 
                         </div>

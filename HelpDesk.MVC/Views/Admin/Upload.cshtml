@@ -1,0 +1,63 @@
+﻿@model HelpDesk.Domain.Core.Articles.Article
+@{
+    ViewData["Title"] = "Upload";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+@section text_editor
+{
+    <link href="~/vendor/dropzone/dropzone.min.css" rel="stylesheet" />
+    <script src="~/vendor/dropzone/dropzone.min.js"></script>
+}
+<section class="content-header">
+    <h1>
+        <small>ساخت حالت سه بعدی عکس</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">  درج عکس جهت ساخت حالت سه بعدی برای</h3>
+                    <h4 class="box-title">  @Model.Title</h4>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <div id="dropzone">
+                            <form action="/Admin/Upload" class="dropzone needsclick dz-clickable" id="uploader">
+                                <div class="dz-message needsclick">
+                                    جهت آپلود دسته ای ، عکسها را اینجا درگ کنید یا کلیک کنید<br>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Tiny_Mce
+{
+    <script>
+        $(document).ready(function () {
+            Dropzone.options.uploader = {
+                paramName: "file",
+                maxFiles: 3,
+                maxFilesize: 2,
+                accept: function (file, done) {
+                    if (file.name == "test.jpg") {
+                        alert("Can't upload a test file.");
+                    }
+                    else {
+                    }
+                }                
+
+            };
+        });
+    </script>
+}
+

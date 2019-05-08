@@ -7,6 +7,15 @@
 {
     <link href="~/css/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
     <link href="~/css/select2.min.css" rel="stylesheet" />
+    <style>
+
+        .inputfield_upload {
+            display: block;
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+    </style>
 }
 <section class="content-header">
     <h1>
@@ -67,7 +76,10 @@
                                 <input type="file" asp-for="Image" class="form-control-" />
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <input type="file" id="files_input_field" name="files" multiple class="inputfield_upload" onchange="upload_files();" />
+                            <input type="button" id="select_and_upload_button" value="Upload Photos.." />
+                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -94,9 +106,7 @@
             relative_urls: false,
             toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
         });
-
     </script>
-
 
 }
 

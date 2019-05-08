@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using HelpDesk.Domain.Contracts.Articles;
@@ -13,6 +14,7 @@ using HelpDesk.MVC.Models.Articles;
 using HelpDesk.MVC.Models.categories;
 using MD.PersianDateTime;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -55,7 +57,8 @@ namespace HelpDesk.MVC.Controllers
         public IActionResult ListCat()
         {
             var cat = categoryRepository.GetAll().ToList();
-            return View(cat);
+           // ViewData["ArticlesCount"] = articleRepository.GetArticlesCountInCategory()
+           return View(cat);
         }
         public IActionResult ListArticle()
         {
@@ -110,6 +113,35 @@ namespace HelpDesk.MVC.Controllers
             DisplayArticleCategory cat = new DisplayArticleCategory();
             cat.CatForDisplay = categoryRepository.GetAll().ToList();
             return View(cat);
+        }
+        public void MultiUpload()
+        {
+
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> UploadFilesAjax(AddNewArticleGetViewModel model)
+        {
+            long uploaded_size = 0;
+            string path_for_Uploaded_Files = _hostingEnvironment.WebRootPath + "\\Images\\Multi\\";
+            var uploaded_files = Request.Form.Files;
+            int iCounter = 0;
+            string sFiles_uploaded = "";
+            foreach (var uploaded_file in uploaded_files)
+            {
+                iCounter++;
+                uploaded_size += uploaded_file.Length;
+                sFiles_uploaded += "\n" + uploaded_file.FileName;
+                string uploaded_Filename = uploaded_file.FileName;
+                string new_Filename_on_Server = path_for_Uploaded_Files + "\\" + uploaded_Filename;
+
+                using (FileStream stream = new FileStream(new_Filename_on_Server, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(stream);
+                }
+            }
+            string message = "Upload successful!\n files uploaded:" + iCounter + "\nsize:" + uploaded_size + "\n" + sFiles_uploaded;
+            return Json("oops");
         }
         [HttpPost]
         public async Task<IActionResult> AddArticle(AddNewArticleGetViewModel model)
@@ -219,6 +251,33 @@ namespace HelpDesk.MVC.Controllers
                 return View(article);
             }
 
+        }
+        public IActionResult Upload(int id)
+        {
+            var article = articleRepository.Get(id);
+            if (article == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Article model = new Article();
+                model.Title = article.Title;
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file,Article article)
+        {
+            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
+            if (file.Length > 0)
+            {
+                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -17,6 +17,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Categories
             this._dbcontext = dbcontext;
         }
 
+
         public List<Category> SearchCategory(string search)
         {
             return _dbcontext.Categories.Where(c => c.Name.Contains(search)).ToList();
