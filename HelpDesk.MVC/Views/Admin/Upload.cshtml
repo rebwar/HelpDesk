@@ -6,7 +6,7 @@
 @section text_editor
 {
     <link href="~/vendor/dropzone/dropzone.min.css" rel="stylesheet" />
-    <script src="~/vendor/dropzone/dropzone.min.js"></script>
+    <script src="~/js/dropzone.js"></script>
 }
 <section class="content-header">
     <h1>
@@ -15,9 +15,7 @@
     <ol class="breadcrumb">
         <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
     </ol>
-
 </section>
-
 <section class="content">
     <div class="row">
         <div class="col-md-9">
@@ -41,24 +39,32 @@
         </div>
     </div>
 </section>
-@section Tiny_Mce
+@section DropZone_Script
 {
-    <script>
-        $(document).ready(function () {
-            Dropzone.options.uploader = {
-                paramName: "file",
-                maxFiles: 3,
-                maxFilesize: 2,
-                accept: function (file, done) {
-                    if (file.name == "test.jpg") {
-                        alert("Can't upload a test file.");
-                    }
-                    else {
-                    }
-                }                
+    <script type='text/javascript'>
+       // $(document).ready(function () {
+        
+        Dropzone.autoDiscover = false;
+        $(function() {
+            $(".dropzone").dropzone({
+                addRemoveLinks: true,
+                removedfile: function (file) {
+                    var name = file.name;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Admin/Upload',
+                        data: { name: name, request: 2 },
+                        sucess: function (data) {
+                            console.log('success: ' + data);
+                        }
+                    });
+                    var _ref;
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                }
+            });
+            });
 
-            };
-        });
+
+       // });
     </script>
 }
-

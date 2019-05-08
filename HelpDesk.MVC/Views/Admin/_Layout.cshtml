@@ -12,6 +12,8 @@
     <link href="~/Admin/css/Ionicons/css/ionicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Admin/css/AdminLTE.css">
     <link rel="stylesheet" href="~/Admin/css/skins/skin-blue.min.css">
+    <script src="~/Admin/js/jquery.min.js"></script>
+    @RenderSection("DropZone_Script", false)
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -21,7 +23,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @RenderSection("Modal_Style", false)
-    @RenderSection("text_editor",false)
+    @RenderSection("text_editor", false)
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -35,7 +37,7 @@
         @Html.Partial("_Footer")
     </div>
 
-    <script src="~/Admin/js/jquery.min.js"></script>
+
 
     <script src="~/Admin/js/bootstrap.min.js"></script>
 
@@ -48,9 +50,9 @@
     <script src="~/vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     @RenderSection("Details_Modal", false)
     @RenderSection("Edit_Modal", false)
-    @RenderSection("Delete_Article",false)
+    @RenderSection("Delete_Article", false)
 </body>
-@RenderSection("Tiny_Mce", false)
 
 
 </html>
+@RenderSection("Tiny_Mce", false)

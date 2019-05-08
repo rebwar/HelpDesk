@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Upload2</title>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/dropzone.js"></script>
+    <link href="~/vendor/dropzone/dropzone.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="dropzone">
+        <form action="/Admin/Upload2" class="dropzone needsclick dz-clickable" id="uploader">
+            <div class="dz-message needsclick">
+                جهت آپلود دسته ای ، عکسها را اینجا درگ کنید یا کلیک کنید<br>
+            </div>
+        </form>
+    </div>
+    <script type='text/javascript'>
+        Dropzone.autoDiscover = false;
+        $(".dropzone").dropzone({
+            addRemoveLinks: true,
+            removedfile: function (file) {
+                var name = file.name;
+
+                $.post("/Admin/Upload2222", { name: name, request: 2 }, function (data) {
+                    spin.addClass("d-none");
+
+                    UpdateImages(data);
+                });
+
+                //$.ajax({
+                //    type: 'POST',
+                //    url: '/Admin/Upload2',
+                //    data: { name: name, request: 2 },
+                //    sucess: function (data) {
+                //        console.log('success: ' + data);
+                //    }
+                //});
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+        });
+    </script>
+</body>
+</html>

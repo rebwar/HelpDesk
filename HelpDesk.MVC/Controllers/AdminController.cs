@@ -114,35 +114,6 @@ namespace HelpDesk.MVC.Controllers
             cat.CatForDisplay = categoryRepository.GetAll().ToList();
             return View(cat);
         }
-        public void MultiUpload()
-        {
-
-        }
-        [HttpPost]
-
-        public async Task<IActionResult> UploadFilesAjax(AddNewArticleGetViewModel model)
-        {
-            long uploaded_size = 0;
-            string path_for_Uploaded_Files = _hostingEnvironment.WebRootPath + "\\Images\\Multi\\";
-            var uploaded_files = Request.Form.Files;
-            int iCounter = 0;
-            string sFiles_uploaded = "";
-            foreach (var uploaded_file in uploaded_files)
-            {
-                iCounter++;
-                uploaded_size += uploaded_file.Length;
-                sFiles_uploaded += "\n" + uploaded_file.FileName;
-                string uploaded_Filename = uploaded_file.FileName;
-                string new_Filename_on_Server = path_for_Uploaded_Files + "\\" + uploaded_Filename;
-
-                using (FileStream stream = new FileStream(new_Filename_on_Server, FileMode.Create))
-                {
-                    await model.Image.CopyToAsync(stream);
-                }
-            }
-            string message = "Upload successful!\n files uploaded:" + iCounter + "\nsize:" + uploaded_size + "\n" + sFiles_uploaded;
-            return Json("oops");
-        }
         [HttpPost]
         public async Task<IActionResult> AddArticle(AddNewArticleGetViewModel model)
         {
@@ -270,14 +241,105 @@ namespace HelpDesk.MVC.Controllers
         public async Task<IActionResult> Upload(IFormFile file,Article article)
         {
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
-            if (file.Length > 0)
+            var request = 1;
+            if (request == 1)
             {
-                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                if (file.Length > 0)
                 {
-                    await file.CopyToAsync(fileStream);
+                    using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
                 }
+            }
+            if(request==2)
+            {
+                var fullPath = Path.Combine(uploads, file.FileName);
+
+                System.IO.File.Delete(fullPath);
+                
+
             }
             return RedirectToAction("Index");
         }
+        public IActionResult Upload2(int id)
+        {
+            var article = articleRepository.Get(id);
+            if (article == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                Article model = new Article();
+                model.Title = article.Title;
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public void Upload2222(string name, int request)
+        {
+            var name2 = name;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload2(IFormFile file, Article article, string name, int request)
+        {
+            var request1 = request;
+            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
+            int i = HttpContext.Request.Headers.Count;
+            request = 1;
+            if (request1 == 1)
+            {
+                if (file.Length > 0)
+                {
+                    using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+            if (request1 == 2)
+            {
+                var fullPath = Path.Combine(uploads, file.FileName);
+
+                System.IO.File.Delete(fullPath);
+
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Upload2(IFormFile file, Article article,string name, int request)
+        //{
+        //    var request1 = request;
+        //    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
+        //    int i = HttpContext.Request.Headers.Count;
+        //    request = 1;
+        //    //halate pishfarze upload =1
+        //    //inja mikham request ro ke post hast begiram o moqayesash konam ke age 2 bood
+        //    //if (String.IsNullOrEmpty(HttpContext.Request.Headers.Count))
+        //        if (request1 == 1)
+        //    {
+        //        if (file.Length > 0)
+        //        {
+        //            using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+        //            {
+        //                await file.CopyToAsync(fileStream);
+        //            }
+        //        }
+        //    }
+        //    if (request1 == 2)
+        //    {
+        //        var fullPath = Path.Combine(uploads, file.FileName);
+
+        //        System.IO.File.Delete(fullPath);
+
+
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
     }
 }
