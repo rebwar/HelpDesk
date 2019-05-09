@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HelpDesk.Domain.Contracts.Articles;
 using HelpDesk.Domain.Contracts.Categories;
+using HelpDesk.Domain.Contracts.Images;
 using HelpDesk.Domain.Core.Articles;
 using HelpDesk.Domain.Core.Categories;
 using HelpDesk.InfraStructures.DataAccess.Common;
@@ -16,6 +17,7 @@ using MD.PersianDateTime;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using HelpDesk.Domain.Core.Images;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace HelpDesk.MVC.Controllers
@@ -25,12 +27,13 @@ namespace HelpDesk.MVC.Controllers
         private readonly ICategoryRepository categoryRepository;
         private readonly IArticleRepository articleRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
-
-        public AdminController(ICategoryRepository categoryRepository, IArticleRepository articleRepository,IHostingEnvironment hostingEnvironment)
+        private readonly IimageRepository imageRepository;
+        public AdminController(IimageRepository imageRepository,ICategoryRepository categoryRepository, IArticleRepository articleRepository,IHostingEnvironment hostingEnvironment)
         {
             this.categoryRepository = categoryRepository;
             this.articleRepository = articleRepository;
             this._hostingEnvironment = hostingEnvironment;
+            this.imageRepository = imageRepository;
         }
         public IActionResult Index()
         {
@@ -237,31 +240,6 @@ namespace HelpDesk.MVC.Controllers
                 return View(model);
             }
         }
-        [HttpPost]
-        public async Task<IActionResult> Upload(IFormFile file,Article article)
-        {
-            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
-            var request = 1;
-            if (request == 1)
-            {
-                if (file.Length > 0)
-                {
-                    using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                    }
-                }
-            }
-            if(request==2)
-            {
-                var fullPath = Path.Combine(uploads, file.FileName);
-
-                System.IO.File.Delete(fullPath);
-                
-
-            }
-            return RedirectToAction("Index");
-        }
         public IActionResult Upload2(int id)
         {
             var article = articleRepository.Get(id);
@@ -277,19 +255,12 @@ namespace HelpDesk.MVC.Controllers
             }
         }
         [HttpPost]
-        public void Upload2222(string name, int request)
+        public async Task<IActionResult> Upload2(IFormFile file, Article article)
         {
-            var name2 = name;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Upload2(IFormFile file, Article article, string name, int request)
-        {
-            var request1 = request;
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
             int i = HttpContext.Request.Headers.Count;
-            request = 1;
-            if (request1 == 1)
+           var request = 1;
+            if (request == 1)
             {
                 if (file.Length > 0)
                 {
@@ -299,7 +270,44 @@ namespace HelpDesk.MVC.Controllers
                     }
                 }
             }
-            if (request1 == 2)
+            if (request == 2)
+            {
+                var fullPath = Path.Combine(uploads, file.FileName);
+
+                System.IO.File.Delete(fullPath);
+
+
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public void Upload2222(string name, int request)
+        {
+            var name2 = name;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile file, Article article, string name, int request)
+        {
+            var request1 = request;
+            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
+            int i = HttpContext.Request.Headers.Count;
+            request = 1;
+            if (request == 1)
+            {
+                if (file.Length > 0)
+                {
+                    Domain.Core.Images.Image image = new Domain.Core.Images.Image();
+                    using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                    {
+                        image.ArticleId = article.Id;
+                        image.Name = @"~/images/" + file.FileName;
+                        imageRepository.Add(image);
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+            if (request == 2)
             {
                 var fullPath = Path.Combine(uploads, file.FileName);
 
@@ -310,36 +318,6 @@ namespace HelpDesk.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Upload2(IFormFile file, Article article,string name, int request)
-        //{
-        //    var request1 = request;
-        //    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "Images\\Multi");
-        //    int i = HttpContext.Request.Headers.Count;
-        //    request = 1;
-        //    //halate pishfarze upload =1
-        //    //inja mikham request ro ke post hast begiram o moqayesash konam ke age 2 bood
-        //    //if (String.IsNullOrEmpty(HttpContext.Request.Headers.Count))
-        //        if (request1 == 1)
-        //    {
-        //        if (file.Length > 0)
-        //        {
-        //            using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-        //            {
-        //                await file.CopyToAsync(fileStream);
-        //            }
-        //        }
-        //    }
-        //    if (request1 == 2)
-        //    {
-        //        var fullPath = Path.Combine(uploads, file.FileName);
-
-        //        System.IO.File.Delete(fullPath);
-
-
-        //    }
-        //    return RedirectToAction("Index");
-        //}
 
     }
 }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using HelpDesk.Domain.Contracts.Articles;
 using HelpDesk.Domain.Contracts.Categories;
+using HelpDesk.Domain.Contracts.Images;
 using HelpDesk.InfraStructures.DataAccess.Articles;
 using HelpDesk.InfraStructures.DataAccess.Categories;
 using HelpDesk.InfraStructures.DataAccess.Common;
+using HelpDesk.InfraStructures.DataAccess.Images;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +47,7 @@ namespace HelpDesk.MVC
                 .AddEntityFrameworkStores<HelpDeskContext>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IimageRepository, ImageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

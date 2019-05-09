@@ -19,6 +19,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
         public DbSet<Article> Articles { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<HelpDesk.Domain.Core.Images.Image> Images { get; set; }
         public HelpDeskContext(DbContextOptions<HelpDeskContext> options)
             :base(options)
         {

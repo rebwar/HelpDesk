@@ -1,4 +1,5 @@
-﻿
+﻿@model HelpDesk.Domain.Core.Articles.Article
+
 @{
     Layout = null;
 }
@@ -28,20 +29,20 @@
             removedfile: function (file) {
                 var name = file.name;
 
-                $.post("/Admin/Upload2222", { name: name, request: 2 }, function (data) {
-                    spin.addClass("d-none");
+                //$.post("/Admin/Upload2222", { name: name, request: 2 }, function (data) {
+                //    spin.addClass("d-none");
 
-                    UpdateImages(data);
-                });
-
-                //$.ajax({
-                //    type: 'POST',
-                //    url: '/Admin/Upload2',
-                //    data: { name: name, request: 2 },
-                //    sucess: function (data) {
-                //        console.log('success: ' + data);
-                //    }
+                //    UpdateImages(data);
                 //});
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/Upload2',
+                    data: { name: name, request: 2 },
+                    sucess: function (data) {
+                        console.log('success: ' + data);
+                    }
+                });
                 var _ref;
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
             }

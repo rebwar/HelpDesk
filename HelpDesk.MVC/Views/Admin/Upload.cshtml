@@ -5,8 +5,10 @@
 }
 @section text_editor
 {
-    <link href="~/vendor/dropzone/dropzone.min.css" rel="stylesheet" />
+    <script src="~/js/jquery.min.js"></script>
     <script src="~/js/dropzone.js"></script>
+    <link href="~/vendor/dropzone/dropzone.min.css" rel="stylesheet" />
+
 }
 <section class="content-header">
     <h1>
@@ -27,10 +29,11 @@
                 <div class="box-body">
                     <div class="form-group">
                         <div id="dropzone">
-                            <form action="/Admin/Upload" class="dropzone needsclick dz-clickable" id="uploader">
+                            <form asp-action="Upload" asp-controller="Admin" class="dropzone needsclick dz-clickable" id="uploader">
                                 <div class="dz-message needsclick">
                                     جهت آپلود دسته ای ، عکسها را اینجا درگ کنید یا کلیک کنید<br>
                                 </div>
+                                <label asp-for="Id" hidden></label>
                             </form>
                         </div>
                     </div>
@@ -42,29 +45,30 @@
 @section DropZone_Script
 {
     <script type='text/javascript'>
-       // $(document).ready(function () {
-        
         Dropzone.autoDiscover = false;
-        $(function() {
-            $(".dropzone").dropzone({
-                addRemoveLinks: true,
-                removedfile: function (file) {
-                    var name = file.name;
-                    $.ajax({
-                        type: 'POST',
-                        url: '/Admin/Upload',
-                        data: { name: name, request: 2 },
-                        sucess: function (data) {
-                            console.log('success: ' + data);
-                        }
-                    });
-                    var _ref;
-                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
-                }
-            });
-            });
+        $(".dropzone").dropzone({
+            addRemoveLinks: true,
+            removedfile: function (file) {
+                var name = file.name;
 
+                //$.post("/Admin/Upload2222", { name: name, request: 2 }, function (data) {
+                //    spin.addClass("d-none");
 
-       // });
+                //    UpdateImages(data);
+                //});
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/Upload',
+                    data: { name: name, request: 2 },
+                    sucess: function (data) {
+                        console.log('success: ' + data);
+                    }
+                });
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+        });
     </script>
+
 }
