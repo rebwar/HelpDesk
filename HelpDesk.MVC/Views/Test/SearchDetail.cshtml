@@ -64,6 +64,19 @@
                     <div class="box-body pad">
                         <p>@Html.Raw(@Model.Body)</p>
                     </div>
+                    @if (Model.Video != null)
+                    {
+                        <div class="form-group">
+                            <video id="vedioPlayer" src="@Url.Content(@Model.Video)" controls="controls" style="width:50%"></video>
+                        </div>
+                    }
+
+                    @if (Model.PDF != null)
+                    {
+                        <div class="form-group">
+                            <a href="@Url.Content(@Model.PDF)" class="btn btn-primary" target="_blank">مشاهده ضمیمه</a>
+                        </div>
+                    }
 
 
 

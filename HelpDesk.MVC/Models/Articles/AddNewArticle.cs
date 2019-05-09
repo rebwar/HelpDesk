@@ -19,12 +19,18 @@ namespace HelpDesk.MVC.Models.Articles
         public string Abstract { get; set; }
         [Required(ErrorMessage = "بدنه متن خالیست")]
         public string Body { get; set; }
+        [Required(ErrorMessage ="عکس خالیست")]
         public IFormFile Image { get; set; }
         [StringLength(60, ErrorMessage = "حداکثر طول رشته تاریخ نباید از 60 کاراکتر بیشتر باشد")]
         public string PublishDate { get; set; }
         public ArticleStatus Status { get; set; }
         public string ImagePath { get; set; }
         public int CategoryId { get; set; }
+        public IFormFile Video { get; set; }
+        public string VideoPath { get; set; }
+        public string PDFPath { get; set; }
+        public IFormFile PDF { get; set; }
+
     }
     public class DisplayArticleCategory:AddNewArticle
     {

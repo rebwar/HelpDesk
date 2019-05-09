@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelpDesk.InfraStructures.DataAccess.Migrations
 {
     [DbContext(typeof(HelpDeskContext))]
-    [Migration("20190509052406_init")]
+    [Migration("13980219073057_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(500);
+
+                    b.Property<string>("Video");
 
                     b.HasKey("Id");
 

@@ -67,6 +67,8 @@
                             <textarea asp-for="Body" class="form-control input-lg text-body" id="mytextarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
 متن خود را بنویسید
                             </textarea>
+                            <span asp-validation-for="Body" class="text-danger"></span>
+
 
                         </div>
 
@@ -74,8 +76,20 @@
                             <div class="form-group">
                                 <label asp-for="Image">ارسال عکس</label>
                                 <input type="file" asp-for="Image" class="form-control-" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="Video">ارسال ویدیو</label>
+                            <input type="file" asp-for="Video" class="form-control-" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PDF">ارسال ضمیمه</label>
+                            <input type="file" asp-for="PDF" class="form-control-" />
+                        </div>
+
+
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

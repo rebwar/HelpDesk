@@ -42,6 +42,7 @@
   <ItemGroup>
     <Folder Include="Views\Shared\Admin\" />
     <Folder Include="wwwroot\Images\Multi\" />
+    <Folder Include="wwwroot\Video\" />
   </ItemGroup>
 
 </Project>

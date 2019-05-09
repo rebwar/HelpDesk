@@ -142,6 +142,27 @@ namespace HelpDesk.MVC.Controllers
                     }
                     article.Image = @"~/images/" + model.Image.FileName;
                 }
+                if ((model?.Video?.Length > 0) && (model?.Video?.ContentType == "video/mp4") )
+                {
+                    string path_root = _hostingEnvironment.WebRootPath;
+                    string path_to_video = path_root + "\\Video\\" + model.Video.FileName;
+                    using (var stream = new FileStream(path_to_video, FileMode.Create))
+                    {
+                        await model.Video.CopyToAsync(stream);
+                    }
+                    article.Video = @"~/video/" + model.Video.FileName;
+                }
+                if ((model?.PDF?.Length > 0) && (model?.PDF?.ContentType == "application/pdf"))
+                {
+                    string path_root = _hostingEnvironment.WebRootPath;
+                    string path_to_pdf = path_root + "\\Pdf\\" + model.PDF.FileName;
+                    using (var stream = new FileStream(path_to_pdf, FileMode.Create))
+                    {
+                        await model.PDF.CopyToAsync(stream);
+                    }
+                    article.PDF = @"~/pdf/" + model.PDF.FileName;
+                }
+
                 articleRepository.Add(article);
             }
             return RedirectToAction(nameof(ListArticle));

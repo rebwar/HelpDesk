@@ -79,7 +79,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     Status = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     PDF = table.Column<string>(nullable: true),
-                    AspNetUsersId = table.Column<string>(nullable: true)
+                    AspNetUsersId = table.Column<string>(nullable: true),
+                    Video = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -50,6 +50,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(500);
 
+                    b.Property<string>("Video");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
