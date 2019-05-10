@@ -19,7 +19,6 @@ namespace HelpDesk.MVC.Models.Articles
         public string Abstract { get; set; }
         [Required(ErrorMessage = "بدنه متن خالیست")]
         public string Body { get; set; }
-        [Required(ErrorMessage ="عکس خالیست")]
         public IFormFile Image { get; set; }
         [StringLength(60, ErrorMessage = "حداکثر طول رشته تاریخ نباید از 60 کاراکتر بیشتر باشد")]
         public string PublishDate { get; set; }

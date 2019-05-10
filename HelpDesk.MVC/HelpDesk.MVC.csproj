@@ -14,12 +14,16 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\persiandatepicker\calendar.js" />
+    <None Include="wwwroot\persiandatepicker\jquery.Bootstrap-PersianDateTimePicker.js" />
   </ItemGroup>
 
 
   <ItemGroup>
     <PackageReference Include="dropzone" Version="4.3.0" />
-    <PackageReference Include="MD.PersianDateTime" Version="3.8.3" />
+    <PackageReference Include="Imageflow.NativeRuntime.win-x86_64" Version="1.1.0-rc18" />
+    <PackageReference Include="Imageflow.Net" Version="0.2.6" />
+    <PackageReference Include="MD.PersianDateTime.Standard" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
@@ -42,6 +46,8 @@
   <ItemGroup>
     <Folder Include="Views\Shared\Admin\" />
     <Folder Include="wwwroot\Images\Multi\" />
+    <Folder Include="wwwroot\Images\Content\" />
+    <Folder Include="wwwroot\Images\Profile\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>
 

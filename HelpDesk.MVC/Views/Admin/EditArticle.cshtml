@@ -51,9 +51,25 @@
 
                         </div>
                         <div class="box-body pad">
-                            <textarea asp-for="Body" class="form-control input-lg text-body" id="mytextarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                            <script src="~/ckeditor/ckeditor.js"></script>
+                            <textarea asp-for="Body" name="Body" class="form-control input-lg text-body" id="Body" >
 
                             </textarea>
+                            <script>
+                                //CKEDITOR.replace('Content');
+                                const config = {
+                                    filebrowserImageBrowseUrl: "/imagebrowser",
+                                    filebrowserImageWindowWidth: 750,
+                                    filebrowserImageWindowHeight: 590,
+                                    filebrowserBrowseUrl: "/linkbrowser",
+                                    filebrowserWindowWidth: 350,
+                                    filebrowserWindowHeight: 500
+                                };
+                                const editor = document.getElementById("Body");
+                                CKEDITOR.replace(editor, config);
+
+                            </script>
+
                         </div>
                         <div class="form-group">
                             <img class="img-bordered-sm  profile-user-img" src="@Model.ImagePath" asp-append-version="true" />
@@ -86,21 +102,4 @@
 
     </div>
 </section>
-@section Tiny_Mce{
-    <script src="~/vendor/tinymce/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea#mytextarea',
-            plugins: 'advlist autolink link lists preview table code pagebreak',
-            menubar: false,
-            language: 'fa',
-            height: 300,
-            relative_urls: false,
-            toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
-        });
-
-    </script>
-
-
-}
 

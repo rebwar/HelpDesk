@@ -1,6 +1,5 @@
 ﻿@model HelpDesk.MVC.Models.Articles.DisplayArticleCategory
 @{
-    ViewData["Title"] = Model.Title;
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 @section text_editor
@@ -60,15 +59,28 @@
 
                         <div class="form-group">
                             <label asp-for="Abstract" class="control-label">توضیحات</label>
-                            <textarea asp-for="Abstract" class="form-control input-lg text-body" maxlength="1000" rows="4"></textarea>
+                            <textarea asp-for="Abstract" class="form-control input-lg text-body" style="resize:none" maxlength="1000" rows="4" ></textarea>
 
                         </div>
-                        <div class="box-body pad">
-                            <textarea asp-for="Body" class="form-control input-lg text-body" id="mytextarea" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
-متن خود را بنویسید
+                        <div class="form-group">
+                            <script src="~/ckeditor/ckeditor.js"></script>
+                            <textarea asp-for="Body" name="Body" class="form-control input-lg text-body" id="Body" >
                             </textarea>
                             <span asp-validation-for="Body" class="text-danger"></span>
+                            <script>
+                                //CKEDITOR.replace('Content');
+                                const config = {
+                                    filebrowserImageBrowseUrl: "/imagebrowser",
+                                    filebrowserImageWindowWidth: 750,
+                                    filebrowserImageWindowHeight: 590,
+                                    filebrowserBrowseUrl: "/linkbrowser",
+                                    filebrowserWindowWidth: 350,
+                                    filebrowserWindowHeight: 500
+                                };
+                                const editor = document.getElementById("Body");
+                                CKEDITOR.replace(editor, config);
 
+                            </script>
 
                         </div>
 
@@ -104,7 +116,7 @@
     </div>
 
 </section>
-@section Tiny_Mce{
+@*@section Tiny_Mce{
     <script src="~/vendor/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
@@ -116,7 +128,7 @@
             relative_urls: false,
             toolbar: 'undo redo | removeformat preview code | fontsizeselect bullist numlist | alignleft aligncenter alignright alignjustify | bold italic | pagebreak table link',
         });
-    </script>
+    </script>*@
 
 }
 

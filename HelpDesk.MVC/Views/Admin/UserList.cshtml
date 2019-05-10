@@ -1,0 +1,73 @@
+﻿@model List<HelpDesk.MVC.Models.Users.ApplicationUsers>
+
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        <small>لیست کاربران </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+        <li class="active">لیست کاربران</li>
+    </ol>
+
+    <section class="content">
+        <p style="padding-right:15px">
+            <a asp-action="CreateUser" class="btn btn-success btn-lg justify-content-center"><i class="fa fa-plus"></i> ایجاد کاربر   </a>
+        </p>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+
+                    <div class="box-header">
+                        <h3 class="box-title">لیست کاربران</h3>
+
+                        <div class="box-tools">
+
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="جستجو">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>نام و نام خانوادگی</th>
+                                    <th>کد استخدامی</th>
+                                    <th>ایمیل</th>
+                                    <th>تلفن</th>
+                                    <th>نقش کاربر</th>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                <td>
+                                    @item.FirstName  @item.LastName
+                                </td>
+                                <td>@item.UserName</td>
+                                <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>
+                                <td><span class="label label-success">تایید شده</span></td>
+
+                            }
+                                <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+</section>
+

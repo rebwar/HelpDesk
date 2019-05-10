@@ -1,0 +1,82 @@
+﻿@model List<HelpDesk.MVC.Models.Users.ApplicationUsers>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+    <section class="content-header">
+        <h1>
+            <small>ویرایش مطلب </small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+            <li class="active">ویرایش مطلب</li>
+        </ol>
+        <section class="content">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">جدول ریسپانسیو</h3>
+
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="جستجو">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>شماره</th>
+                                        <th>کاربر</th>
+                                        <th>تاریخ</th>
+                                        <th>وضعیت</th>
+                                        <th>دلیل</th>
+                                    </tr>
+                                    <tr>
+                                        <td>183</td>
+                                        <td>جان</td>
+                                        <td>۱۳ مرداد ۱۳۹۶</td>
+                                        <td><span class="label label-success">تایید شده</span></td>
+                                        <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </td>
+                                    </tr>
+                                    <tr>
+                                        <td>219</td>
+                                        <td>الکساندر</td>
+                                        <td>۱۴ مرداد ۱۳۹۶</td>
+                                        <td><span class="label label-warning">در حال بررسی</span></td>
+                                        <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </td>
+                                    </tr>
+                                    <tr>
+                                        <td>657</td>
+                                        <td>باب</td>
+                                        <td>۱۵ مرداد ۱۳۹۶</td>
+                                        <td><span class="label label-primary">در انتظار</span></td>
+                                        <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </td>
+                                    </tr>
+                                    <tr>
+                                        <td>175</td>
+                                        <td>مایک</td>
+                                        <td>۱۶ مرداد ۱۳۹۶</td>
+                                        <td><span class="label label-danger">رد شده</span></td>
+                                        <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+            </section>
+        </section>
+

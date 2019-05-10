@@ -9,6 +9,8 @@ using HelpDesk.InfraStructures.DataAccess.Articles;
 using HelpDesk.InfraStructures.DataAccess.Categories;
 using HelpDesk.InfraStructures.DataAccess.Common;
 using HelpDesk.InfraStructures.DataAccess.Images;
+using HelpDesk.MVC.Models.Users;
+using HelpDesk.MVC.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -40,14 +42,25 @@ namespace HelpDesk.MVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            int minPasswordLenght = int.Parse(Configuration["MinPasswordLength"]);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HelpDeskContext>(c => c.UseSqlServer(Configuration.GetConnectionString("HelpDesk")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<HelpDeskContext>();
+            services.AddDbContext<UserDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("UserDb")));
+            services.AddIdentity<ApplicationUsers, ApplicaionRoles>(c =>
+            {
+                c.User.RequireUniqueEmail = true;
+                c.Password.RequireDigit = false;
+                c.Password.RequiredLength = minPasswordLenght;
+                c.Password.RequireNonAlphanumeric = false;
+                c.Password.RequireUppercase = false;
+                c.Password.RequiredUniqueChars = 1;
+                c.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<UserDbContext>()
+            .AddDefaultTokenProviders(); 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IArticleRepository, ArticleRepository>();
             services.AddScoped<IimageRepository, ImageRepository>();
+            services.AddScoped<IUploadFileRepository, UploadFileRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
