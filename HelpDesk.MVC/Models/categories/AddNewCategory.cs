@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HelpDesk.Domain.Core.Articles;
+using HelpDesk.Domain.Core.Categories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,5 +17,13 @@ namespace HelpDesk.MVC.Models.categories
         public string Name { get; set; }
         [StringLength(200,ErrorMessage ="حداکثر طول رشته نباید از 200 کاراکتر بیشتر باشد")]
         public string Description { get; set; }
+    }
+    public class DesplayCategoryCount
+    {
+        public int Id { get; set; }
+        public List<Article> Articles { get; set; }
+        public List<Category> Categories { get; set; }
+        public List<int> Count { get; set; }
+        public List<string> CategoryName { get; set; }
     }
 }
