@@ -1,0 +1,75 @@
+/** LITESUGGEST
+ *
+ * Arielle Chapin 2015
+ * MIT License
+ * ariellechapin.me
+ */
+.litesuggest-group {
+    position: relative;
+    height: auto;
+}
+
+.litesuggest-group input[type=text] {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.litesuggest-group .litesuggest-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.1s;
+    z-index: 100;
+	box-shadow: 1px 1px 3px #B5B5B5;
+    font-size: 1.7em;
+    background-color: white;
+}
+
+.litesuggest-suggestions.litesuggest-open {
+    max-height: 500px;
+}
+
+.litesuggest-group ul {
+    position: relative;
+    width: 100%;
+    height: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.litesuggest-group li {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #B5B5B5;
+    transition: background-color 0.05s, color 0.05s;
+}
+
+.litesuggest-group li:hover, .litesuggest-group li.litesuggest-focus {
+    background-color: #eee;
+    cursor: pointer;
+    color: #404040;
+}
+
+
+/* Color of suggestion */
+.litesuggest-correct {
+    color: #7CB0EB; /* CHANGE THIS HEX TO CHANGE UNFOCUSED SUGGESTION COLOR */
+    transition: color 0.2s;
+}
+
+li:hover .litesuggest-correct, h1:hover .litesuggest-correct, li.litesuggest-focus .litesuggest-correct {
+    color: #4697F2; /* CHANGE THIS HEX TO CHANGE FOCUSED SUGGESTION COLOR */
+}

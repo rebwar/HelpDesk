@@ -1,0 +1,105 @@
+﻿@model HelpDesk.Domain.Core.Articles.Article
+@{
+    ViewData["Title"] = "SearchDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Article_Detail_css
+{
+    <link href="~/Admin/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Admin/css/AdminLTE.css" rel="stylesheet" />
+}
+
+<section class="content">
+    <div class="section-title">
+        @*<span>خدمات</span>
+            <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
+            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
+        <div class="s130">
+            <div class="form">
+                <div class="inner-form">
+                    <div>
+                        <div class="svg-wrapper">
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+
+                <div class="box-body clearfix">
+
+                    <div class="form-group">
+                        <p>@Model.Title</p>
+                    </div>
+                    <div class="form-group">
+                        <img class="img-bordered-sm" style="max-width:50%" src="@Model.Image" asp-append-version="true" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label ">تاریخ انتشار:</label>
+
+                        <label class="control-label input-lg">@Model.PublishDate</label>
+
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">گروه:</label>
+
+                        <label class="control-label input-lg">@ViewData["Category"]</label>
+                    </div>
+
+                    <div class="form-group">
+                        <blockquote class="pull-right">  <p>@Model.Abstract</p></blockquote>
+
+                    </div>
+                    <div class="box-body pad">
+                        <p>@Html.Raw(@Model.Body)</p>
+                    </div>
+                    @if (Model.Video != null)
+                    {
+                        <div class="form-group">
+                            <video id="vedioPlayer" src="@Url.Content(@Model.Video)" controls="controls" style="width:50%"></video>
+                        </div>
+                    }
+
+                    @if (Model.PDF != null)
+                    {
+                        <div class="form-group">
+                            <a href="@Url.Content(@Model.PDF)" class="btn btn-primary" target="_blank">مشاهده ضمیمه</a>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <p>
+                            تعداد بازدید مطلب: @Model.ViewCount
+                        </p>
+                    </div>
+                    <form asp-action="SearchDetail" asp-controller="Home" method="post">
+                        fa fa-thumbs-o-up margin-r-5
+                        <div class="form-group">
+                            <button class=""
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+
+

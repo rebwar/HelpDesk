@@ -15,6 +15,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
         {
             this.context = dbcontext;
         }
+
+
         public int GetArticlesCountInCategory(int id)
         {
             return context.Articles.Where(c => c.CategoryId == id).Count();
@@ -34,6 +36,12 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
         public List<Article> GetTopViewedArticles(int ArticleNumbers)
         {
             return context.Articles.OrderByDescending(c => c.ViewCount).Take(ArticleNumbers).ToList();
+        }
+
+        public List<Article> SearchArticle(string search)
+        {
+            return context.Articles.Where(c => c.Title.Contains(search)).ToList();
+
         }
     }
 }

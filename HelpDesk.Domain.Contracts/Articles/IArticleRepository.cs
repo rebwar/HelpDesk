@@ -12,5 +12,7 @@ namespace HelpDesk.Domain.Contracts.Articles
         List<Article> GetNewArticles(int ArticleNumbers);
         List<Article> GetTopLikeArticles(int ArticleNumbers);
         List<Article> GetTopViewedArticles(int ArticleNumbers);
+        List<Article> SearchArticle(string search);
+
     }
 }

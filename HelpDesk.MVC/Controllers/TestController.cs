@@ -14,8 +14,6 @@ namespace HelpDesk.MVC.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IArticleRepository articleRepository;
-
-
         public TestController(ICategoryRepository categoryRepository,IArticleRepository articleRepository)
         {
             this.categoryRepository = categoryRepository;
@@ -33,14 +31,14 @@ namespace HelpDesk.MVC.Controllers
         }
         public List<Article> SearchArticle(string search)
         {
-            return articleRepository.Search(search).ToList();
+            return articleRepository.SearchArticle(search).ToList();
         }
         [Route("test/searchresult/{term?}")]
 
         public IActionResult SearchResult(string term="")
         {
 
-            var article = articleRepository.Search(term).ToList();
+            var article = articleRepository.SearchArticle(term).ToList();
             return View(article);
         }
         public IActionResult SearchDetail(int id)

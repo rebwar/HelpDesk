@@ -32,14 +32,14 @@ namespace HelpDesk.MVC.Controllers
             desplayCategory.Articles = articleRepository.GetAll().ToList();
 
 
-           ViewBag.Tops = from c in desplayCategory.Categories
-                                           join p in desplayCategory.Articles on c.Id equals p.CategoryId
-                                           group p by c.Name into g
-                                           select new
-                                           {                                               
-                                               Name = g.Key,
-                                               Count = g.Count()
-                                           }.Name.ToList();
+            ViewBag.Tops = from c in desplayCategory.Categories
+                           join p in desplayCategory.Articles on c.Id equals p.CategoryId
+                           group p by c.Name into g
+                           select new
+                           {
+                               Name = g.Key,
+                               Count = g.Count()
+                           };
             var TopArticles = articleRepository.GetTopViewedArticles(5);
             return View(TopArticles);
         }
@@ -54,11 +54,35 @@ namespace HelpDesk.MVC.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult SearchResult(string articleTitle)
+        public List<Article> SearchArticle(string search)
+        {
+            return articleRepository.SearchArticle(search).ToList();
+        }
+        [Route("Home/searchresult/{term?}")]
+
+        public IActionResult SearchResult(string term = "")
         {
 
-            var article = articleRepository.Search(articleTitle).ToList();
+            var article = articleRepository.SearchArticle(term).ToList();
             return View(article);
         }
+        public IActionResult SearchDetail(int id)
+        {
+            var model = articleRepository.Get(id);
+            Article article = new Article();
+            article = model;
+            article.ViewCount = article.ViewCount + 1;                
+            articleRepository.Update(model);
+            return View(model);
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult SearchDetail(int id,Article article)
+        //{
+        //    var model = articleRepository.Get(id);
+        //    article.ViewCount = article.ViewCount + 1;
+        //    articleRepository.Update(article);
+        //    return View(model);
+        //}
     }
 }

@@ -26,4 +26,9 @@ namespace HelpDesk.MVC.Models.categories
         public List<int> Count { get; set; }
         public List<string> CategoryName { get; set; }
     }
+    public class NameCount
+    {
+        public List<int> Count { get; set; }
+        public List<string> Name { get; set; }
+    }
 }
