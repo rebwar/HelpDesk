@@ -17,7 +17,9 @@ namespace HelpDesk.Domain.Core.Articles
         public int CategoryId { get; set; }
         public string PDF { get; set; }
         public string AspNetUsersId { get; set; }
-        public string Video { get; set; }        
+        public string Video { get; set; }
+        public int ViewCount { get; set; }
+        public int Likes { get; set; }
 
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HelpDesk.InfraStructures.DataAccess.Migrations
 {
-    public partial class init : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,7 +80,9 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     CategoryId = table.Column<int>(nullable: false),
                     PDF = table.Column<string>(nullable: true),
                     AspNetUsersId = table.Column<string>(nullable: true),
-                    Video = table.Column<string>(nullable: true)
+                    Video = table.Column<string>(nullable: true),
+                    ViewCount = table.Column<int>(nullable: false),
+                    Likes = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

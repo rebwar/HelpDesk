@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelpDesk.InfraStructures.DataAccess.Migrations
 {
     [DbContext(typeof(HelpDeskContext))]
-    [Migration("13980219073057_init")]
-    partial class init
+    [Migration("20190511033814_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .IsRequired()
                         .IsUnicode(false);
 
+                    b.Property<int>("Likes");
+
                     b.Property<string>("PDF");
 
                     b.Property<string>("PublishDate")
@@ -53,6 +55,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .HasMaxLength(500);
 
                     b.Property<string>("Video");
+
+                    b.Property<int>("ViewCount");
 
                     b.HasKey("Id");
 

@@ -138,24 +138,11 @@ namespace HelpDesk.MVC.Controllers
                     Body = model.Body,
                     PublishDate = persiandate.ToString(),
                     Status = ArticleStatus.Publish,
-                    CategoryId = model.SelectedCat
+                    CategoryId = model.SelectedCat,
+                    Likes=0,
+                    ViewCount=0
+                    
                 };
-                //if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType=="image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
-                //{
-
-                //    string newFileName = uploadFileRepository.UplaodFile(model.Image, "\\Images\\");
-                //    article.Image = @"~/images/" + newFileName;
-                //}
-                //if ((model?.Video?.Length > 0) && (model?.Video?.ContentType == "video/mp4") )
-                //{
-                //    string newFileName = uploadFileRepository.UplaodFile(model.Video, "\\video\\");
-                //    article.Video = @"~/video/" + newFileName;
-                //}
-                //if ((model?.PDF?.Length > 0) && (model?.PDF?.ContentType == "application/pdf"))
-                //{
-                //    string newFileName = uploadFileRepository.UplaodFile(model.PDF, "\\pdf\\");
-                //    article.PDF = @"~/pdf/" + newFileName;
-                //}
                 if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType == "image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
                 {
                     string path_root = _hostingEnvironment.WebRootPath;

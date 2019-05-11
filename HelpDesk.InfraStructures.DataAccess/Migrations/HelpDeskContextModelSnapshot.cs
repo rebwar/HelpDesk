@@ -38,6 +38,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .IsRequired()
                         .IsUnicode(false);
 
+                    b.Property<int>("Likes");
+
                     b.Property<string>("PDF");
 
                     b.Property<string>("PublishDate")
@@ -51,6 +53,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                         .HasMaxLength(500);
 
                     b.Property<string>("Video");
+
+                    b.Property<int>("ViewCount");
 
                     b.HasKey("Id");
 

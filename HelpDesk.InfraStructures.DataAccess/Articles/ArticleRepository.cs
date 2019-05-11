@@ -20,5 +20,14 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
             return context.Articles.Where(c => c.CategoryId == id).Count();
         }
 
+        public List<Article> GetNewArticles(int ArticleNumbers)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Article> GetTopLikeArticles(int ArticleNumbers)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

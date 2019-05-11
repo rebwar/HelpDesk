@@ -9,6 +9,7 @@ namespace HelpDesk.Domain.Contracts.Articles
    public interface IArticleRepository: IBaseRepository<Article>
     {
         int GetArticlesCountInCategory(int id);
-
+        List<Article> GetNewArticles(int ArticleNumbers);
+        List<Article> GetTopLikeArticles(int ArticleNumbers);
     }
 }
