@@ -22,12 +22,18 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
 
         public List<Article> GetNewArticles(int ArticleNumbers)
         {
-            throw new NotImplementedException();
+            return context.Articles.OrderByDescending(c => c.Id).Take(ArticleNumbers).ToList();
         }
 
         public List<Article> GetTopLikeArticles(int ArticleNumbers)
         {
-            throw new NotImplementedException();
+            return context.Articles.OrderByDescending(c => c.Likes).Take(ArticleNumbers).ToList();
+
+        }
+
+        public List<Article> GetTopViewedArticles(int ArticleNumbers)
+        {
+            return context.Articles.OrderByDescending(c => c.ViewCount).Take(ArticleNumbers).ToList();
         }
     }
 }

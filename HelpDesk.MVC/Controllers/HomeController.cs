@@ -20,7 +20,8 @@ namespace HelpDesk.MVC.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            var TopArticles = articleRepository.GetTopViewedArticles(5);
+            return View(TopArticles);
         }
 
         public IActionResult Privacy()

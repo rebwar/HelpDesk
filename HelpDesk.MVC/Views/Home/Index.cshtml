@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<HelpDesk.Domain.Core.Articles.Article>
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -34,7 +35,13 @@
                 <div class="single-services text-center">
                     <i class="icofont-ruler-pencil"></i>
                     <h3>نرم افزار</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
+                    @foreach (var item in Model)
+                    {
+                <p>
+                    <a asp-action="SearchDetail" asp-controller="Test" asp-route-id="@item.Id">@item.Title </a>
+                </p>
+
+                    }
                 </div>
             </div>
 
