@@ -76,16 +76,14 @@
                             <a href="@Url.Content(@Model.PDF)" class="btn btn-primary" target="_blank">مشاهده ضمیمه</a>
                         </div>
                     }
-
                     <div class="form-group">
                         <p>
                             تعداد بازدید مطلب: @Model.ViewCount
                         </p>
                     </div>
                     <form asp-action="SearchDetail" asp-controller="Home" method="post">
-                        fa fa-thumbs-o-up margin-r-5
                         <div class="form-group">
-                            <button class=""
+                            <button type="submit" class="btn btn-app">مطلب را پسندیدم</button>
                         </div>
 
 
