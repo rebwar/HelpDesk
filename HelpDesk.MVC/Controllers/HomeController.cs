@@ -32,11 +32,11 @@ namespace HelpDesk.MVC.Controllers
             desplayCategory.Articles = articleRepository.GetAll().ToList();
 
 
-           var Counts = from c in desplayCategory.Categories
+           ViewBag.Tops = from c in desplayCategory.Categories
                                            join p in desplayCategory.Articles on c.Id equals p.CategoryId
                                            group p by c.Name into g
                                            select new
-                                           {
+                                           {                                               
                                                Name = g.Key,
                                                Count = g.Count()
                                            }.Name.ToList();

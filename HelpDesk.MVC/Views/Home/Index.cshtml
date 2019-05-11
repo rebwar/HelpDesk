@@ -86,7 +86,12 @@
             </div>
         </div>
         <div class="row">
-            
+            @foreach (var item in @ViewBag.Tops)
+            {
+                <p> @item[0]  
+            </p>
+
+            }
         </div>
     </div>
 </section>
