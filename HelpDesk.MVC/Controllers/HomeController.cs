@@ -31,17 +31,24 @@ namespace HelpDesk.MVC.Controllers
             desplayCategory.Categories = categoryRepository.GetAll().ToList();
             desplayCategory.Articles = articleRepository.GetAll().ToList();
 
-
-            ViewBag.Tops = from c in desplayCategory.Categories
-                           join p in desplayCategory.Articles on c.Id equals p.CategoryId
-                           group p by c.Name into g
-                           select new
-                           {
-                               Name = g.Key,
-                               Count = g.Count()
+            List<NameCount> nameCount = new List<NameCount>();
+            var test = from c in desplayCategory.Categories
+                       join p in desplayCategory.Articles on c.Id equals p.CategoryId
+                       group p by c.Name into g
+                       select new NameCount
+                       {
+                           Name = g.Key,
+                           ArticleTitle=g.ToList() ,
+                           Count=g.Count()
                            };
+            nameCount = test.ToList();
+
+            ViewBag.Tops = nameCount;
+                    
+                
+            
             var TopArticles = articleRepository.GetTopViewedArticles(5);
-            return View(TopArticles);
+            return View(nameCount);
         }
 
         public IActionResult Privacy()

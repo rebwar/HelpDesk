@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HelpDesk.Domain.Core.Articles.Article>
+﻿@model IEnumerable<HelpDesk.MVC.Models.categories.NameCount>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -18,8 +18,8 @@
 
             <div class="section-title">
                 @*<span>خدمات</span>
-                    <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
-                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
+            <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
+            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
                 <div class="s130">
                     <div class="form">
                         <div class="inner-form">
@@ -41,70 +41,35 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-ruler-pencil"></i>
-                        <h3>نرم افزار</h3>
-                        @foreach (var item in Model)
-                        {
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-services text-center">
+                            <i class="icofont-ruler-pencil"></i>
+                            <h3>
+                                @item.Name
+                                (@item.ArticleTitle.Count())
+                            </h3>
                             <p>
-                                <a asp-action="SearchDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title </a>
                             </p>
 
-                        }
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-laptop-alt"></i>
-                        <h3>سخت افزار</h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-data"></i>
-                        <h3>سامانه ها</h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-ssl-security"></i>
-                        <h3>امنیت </h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-globe-alt"></i>
-                        <h3>شبکه</h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center">
-                        <i class="icofont-support"></i>
-                        <h3>متفرقه</h3>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>
-                    </div>
-                </div>
-            </div>
-            @ViewBag.Tops
-            <div class="row">
-                @foreach (var item in ViewBag.Tops)
-                {
-                    <p>
-                        @item
-                    </p>
-                    <br />
 
                 }
+
+
+            </div>
+            <div class="row">
+                @*@foreach (var item in Model)
+                {
+                    <p>
+                        <a asp-action="SearchDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title </a>
+                    </p>
+
+                }*@
+
             </div>
         </form>
     </div>
