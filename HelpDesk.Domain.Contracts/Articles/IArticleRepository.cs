@@ -13,6 +13,7 @@ namespace HelpDesk.Domain.Contracts.Articles
         List<Article> GetTopLikeArticles(int ArticleNumbers);
         List<Article> GetTopViewedArticles(int ArticleNumbers);
         List<Article> SearchArticle(string search);
+        int GetVisitCount();
 
     }
 }

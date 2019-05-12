@@ -6,11 +6,6 @@
 
 <link href="~/persiandatepicker/jquery.Bootstrap-PersianDateTimePicker.css" rel="stylesheet" />
 
-<style>
-    .circleInput {
-        border-radius: 3px;
-    }
-</style>
 <section class="content-header">
     <h1>
         <small>کاربر جدید</small>
@@ -20,156 +15,165 @@
         <li class="active">کاربر جدید</li>
     </ol>
 </section>
-
-    <div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
-        <div class="col-md-4 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">
-            <form asp-controller="Admin" asp-action="CreateUser" method="post" enctype="multipart/form-data">
-
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control circleInput" placeholder="نام را وارد نمایید" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+<section class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> کاربر جدید</h3>
                 </div>
+                @*<div class="row center-block box box-primary" style="box-shadow:2px 2px 7px 3px gray;">
+                <div class="col-md-4 col-md-offset-2" style="margin-bottom:15px; margin-top:15px;">*@
 
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control circleInput" placeholder="نام خاانوادگی را وارد نمایید" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
+                <form asp-controller="Admin" asp-action="CreateUser" method="post" enctype="multipart/form-data">
+                    <div class="box-body">
 
-                <div class="form-group circleInput">
-                    <label asp-for="Email" class="control-label"></label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-inbox"></i>
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control circleInput" placeholder="نام را وارد نمایید" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
-                        <input asp-for="Email" class="form-control" placeholder="ایمیل را وارد نمایید" />
-                    </div>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
 
-
-                <div class="form-group">
-                    <label asp-for="PhoneNumber" class="control-label"></label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-phone"></i>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control circleInput" placeholder="نام خاانوادگی را وارد نمایید" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
-                        <input asp-for="PhoneNumber" class="form-control circleInput" placeholder="شماره تماس را وارد نمایید" />
-                    </div>
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
 
-
-
-
-                <div class="form-group">
-                    <label asp-for="BirthDayDate" class="control-label"></label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+                        <div class="form-group circleInput">
+                            <label asp-for="Email" class="control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-inbox"></i>
+                                </div>
+                                <input asp-for="Email" class="form-control" placeholder="ایمیل را وارد نمایید" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        <input asp-for="BirthDayDate" class="form-control circleInput"
-                               placeholder="تاریخ تولد را انتخاب نمایید" id="birthdaydate" name="birthdaydate"
-                               data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#birthdaydate" data-groupid="group1"
-                               data-formdate="true" data-enabletimepicker="false" data-placement="bottom" />
+
+
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <input asp-for="PhoneNumber" class="form-control circleInput" placeholder="شماره تماس را وارد نمایید" />
+                            </div>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label asp-for="BirthDayDate" class="control-label"></label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input asp-for="BirthDayDate" class="form-control circleInput"
+                                       placeholder="تاریخ تولد را انتخاب نمایید" id="birthdaydate" name="birthdaydate"
+                                       data-MdDateTimePicker="true" data-trigger="click" data-targetselector="#birthdaydate" data-groupid="group1"
+                                       data-formdate="true" data-enabletimepicker="false" data-placement="bottom" />
+                            </div>
+                            <span asp-validation-for="BirthDayDate" class="text-danger"></span>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label asp-for="UserName" class="control-label"></label>
+                            <input asp-for="UserName" class="form-control circleInput" placeholder="کد استخدامی را وارد نمایید" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control circleInput" placeholder="رمز عبور را به صورت قوی وارد نمایید" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control circleInput" placeholder="تکرار رمز عبور را وارد نمایید" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="gender" class="control-label"></label>
+                            <select asp-for="gender" class="form-control circleInput">
+                                <option value="1">آقا</option>
+                                <option value="2">خانم</option>
+                            </select>
+                            <span asp-validation-for="gender" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="UserImage" class="control-label"></label>
+                            <div class="form-horizontal">
+                                <input asp-for="UserImage" type="file" id="files" name="files" />
+                                <br />
+                                <input type="button" onclick="UploadImage()" id="btnupload" class="btn btn-info" value="آپلود و نمایش تصویر" />
+                            </div>
+                            <span asp-validation-for="UserImage" class="text-danger"></span>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <input type="submit" value="ایجاد" class="btn  btn-success btn-lg" />
+                            <a asp-action="UserList" class="btn btn-danger btn-lg">بازگشت</a>
+                        </div>
+
+                        <input type="text" class="hidden" id="imagename" name="imagename" />
                     </div>
-                    <span asp-validation-for="BirthDayDate" class="text-danger"></span>
-                </div>
+
+                </form>
+
+                @if (ViewBag.SuccessMessage != "")
+                {
+                    <span style="color:green;">
+                        @ViewBag.SuccessMessage
+                    </span>
+                }
 
 
-
-
-                <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control circleInput" placeholder="کد استخدامی را وارد نمایید" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control circleInput" placeholder="رمز عبور را به صورت قوی وارد نمایید" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-
-
-                <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
-                    <input asp-for="ConfirmPassword" class="form-control circleInput" placeholder="تکرار رمز عبور را وارد نمایید" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                </div>
-
-
-                <div class="form-group">
-                    <label asp-for="gender" class="control-label"></label>
-                    <select asp-for="gender" class="form-control circleInput">
-                        <option value="1">آقا</option>
-                        <option value="2">خانم</option>
-                    </select>
-                    <span asp-validation-for="gender" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="UserImage" class="control-label"></label>
-                    <div class="form-horizontal">
-                        <input asp-for="UserImage" type="file" id="files" name="files" />
-                        <input type="button" onclick="UploadImage()" id="btnupload" class="btn btn-info" value="آپلود و نمایش تصویر" />
-                    </div>
-                    <span asp-validation-for="UserImage" class="text-danger"></span>
-                </div>
-
-
-
-                <div class="form-group">
-                    <input type="submit" value="ایجاد" class="btn btn-success" />
-                    <a asp-action="UserList" class="btn btn-danger">بازگشت</a>
-                </div>
-
-                <input type="text" class="hidden" id="imagename" name="imagename" />
-
-            </form>
-
-            @if (ViewBag.SuccessMessage != "")
-            {
-                <span style="color:green;">
-                    @ViewBag.SuccessMessage
-                </span>
-            }
-
+            </div>
 
         </div>
-
         <div class="col-md-4" style="margin-top:25px; margin-bottom:25px;">
             <div class="col-md-10 col-md-offset-1">
-                <div class="box box-widget widget-user">
-                    <div class="widget-user-header bg-light-blue-active text-center">
-                        <h3 class="widget-user-username">تصویر کاربر</h3>
-                    </div>
-                </div>
                 <div class="form-group">
                     <img id="imguser" class="img-bordered col-md-12 col-xs-12 col-sm-12"
-                         src="~/upload/userimage/normalimage/defaultuserImage.png" alt="UserImage"
-                         style="height:350px;" />
+                         src="~/Images/Profile/DefaultProfile.jpg" alt="UserImage"
+                         style="height:250px;" />
                 </div>
                 <div id="divmessage" class="text-center hidden" style="color:green;">
                 </div>
 
             </div>
         </div>
+
     </div>
+</section>
 
 
 
-    @section PanelScripts{
-        <script src="~/persiandatepicker/calendar.js"></script>
-        <script src="~/persiandatepicker/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+        @section PanelScripts{
+            <script src="~/persiandatepicker/calendar.js"></script>
+            <script src="~/persiandatepicker/jquery.Bootstrap-PersianDateTimePicker.js"></script>
 
 
-        <script>
+            <script>
         var UploadImage = function () {
             var data = new FormData;
             var file = $("#files").get(0);
@@ -205,7 +209,7 @@
 
 
 
-        </script>
+            </script>
 
 
-    }
+        }

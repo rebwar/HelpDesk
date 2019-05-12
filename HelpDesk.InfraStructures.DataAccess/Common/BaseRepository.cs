@@ -50,6 +50,9 @@ namespace HelpDesk.InfraStructures.DataAccess.Common
             return _dbcontext.Set<TEntity>().AsQueryable();
         }
 
-
+        public int GetStatistic()
+        {
+            return _dbcontext.Set<TEntity>().Count();
+        }
     }
 }

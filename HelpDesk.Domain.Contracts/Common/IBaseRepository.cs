@@ -14,6 +14,7 @@ namespace HelpDesk.Domain.Contracts.Common
         TEntity Add(TEntity entity);
         void Update(TEntity entity);
         IQueryable<TEntity> Search(string term);
+        int GetStatistic();
 
     }
 }

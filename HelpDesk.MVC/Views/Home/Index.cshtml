@@ -52,10 +52,12 @@
                             </h3>
                             @foreach (var item2 in item.ArticleTitle)
                             {
-                                <p>
+                        <p>
+                            <a asp-action="SearchDetail" asp-route-id="@item2.Id" asp-controller="Home" data-id="@item2.Id" style="text-decoration:none">
+                                @item2.Title
+                            </a>
 
-                                    @item2.Title
-                                </p>
+                        </p>
 
                             }
 

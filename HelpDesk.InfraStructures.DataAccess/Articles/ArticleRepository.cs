@@ -38,6 +38,11 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
             return context.Articles.OrderByDescending(c => c.ViewCount).Take(ArticleNumbers).ToList();
         }
 
+        public int GetVisitCount()
+        {
+            return context.Articles.Sum(x => x.ViewCount);
+        }
+
         public List<Article> SearchArticle(string search)
         {
             return context.Articles.Where(c => c.Title.Contains(search)).ToList();

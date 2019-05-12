@@ -44,7 +44,12 @@ namespace HelpDesk.MVC.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            Statistics statistics = new Statistics();
+            statistics.Articles = articleRepository.GetStatistic();
+            statistics.Users = userManager.Users.Count();
+            statistics.PageVisited = articleRepository.GetVisitCount();
+            statistics.Categories = categoryRepository.GetStatistic();
+            return View(statistics);
         }
         public IActionResult AddCategory()
         {
