@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<HelpDesk.MVC.Models.categories.NameCount>
 
-@{
-    ViewData["Title"] = "Home Page";
-}
 @section autocomplete_css
 {
     <link href="~/css/easy-autocomplete.css" rel="stylesheet" />
@@ -18,8 +15,8 @@
 
             <div class="section-title">
                 @*<span>خدمات</span>
-            <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
-            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
+                    <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
                 <div class="s130">
                     <div class="form">
                         <div class="inner-form">
@@ -40,29 +37,33 @@
 
             </div>
 
-            <div class="row">
+            <div class="card-deck mb-3 text-center">
                 @foreach (var item in Model)
                 {
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-services text-center">
-                            <i class="icofont-ruler-pencil"></i>
-                            <h3>
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header ">
+                            <h4 class="my-0 font-weight-normal">
                                 @item.Name
-                                (@item.ArticleTitle.Count())
-                            </h3>
-                            @foreach (var item2 in item.ArticleTitle)
-                            {
-                        <p>
-                            <a asp-action="SearchDetail" asp-route-id="@item2.Id" asp-controller="Home" data-id="@item2.Id" style="text-decoration:none">
-                                @item2.Title
-                            </a>
+                                
+                            </h4>
+                            </div>
 
-                        </p>
+                        <div class="card-body">
+                            <p class="card-text">
+                                @foreach (var item2 in item.ArticleTitle)
+                                {
+                                <p class="text-right">
+                                    <a asp-action="SearchDetail" asp-route-id="@item2.Id" asp-controller="Home" data-id="@item2.Id" style="text-decoration:none">
+                                        @item2.Title
+                                    </a>
+                                </p>
+
 
                             }
-
+                           
                         </div>
-                    </div>
+                            </div>
+                           
 
 
                 }
@@ -71,12 +72,11 @@
             </div>
             <div class="row">
                 @*@foreach (var item in Model)
-                {
-                    <p>
-                        <a asp-action="SearchDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title </a>
-                    </p>
-
-                }*@
+                    {
+                        <p>
+                            <a asp-action="SearchDetail" asp-controller="Home" asp-route-id="@item.Id">@item.Title </a>
+                        </p>
+                    }*@
 
             </div>
         </form>
@@ -85,17 +85,12 @@
 @section Scripts{
     <script>
         var options = {
-
             url: function (search) {
                 return "/Home/SearchArticle";
             },
-
             getValue: function (element) {
                 return element.title;
             },
-
-
-
             list: {
                 match: {
                     enabled: false
@@ -113,7 +108,6 @@
                     time: 100
                 }
             },
-
             ajaxSettings: {
                 dataType: "json",
                 method: "POST",
@@ -121,17 +115,13 @@
                     dataType: "json"
                 }
             },
-
             preparePostData: function (data) {
                 data.search = $("#search").val();
                 return data;
             },
-
             requestDelay: 200,
             theme: "round"
         };
-
         $("#search").easyAutocomplete(options);
     </script>
 }
-

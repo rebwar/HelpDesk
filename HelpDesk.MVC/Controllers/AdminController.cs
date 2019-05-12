@@ -33,8 +33,13 @@ namespace HelpDesk.MVC.Controllers
         private readonly IUploadFileRepository uploadFileRepository;
         private readonly IimageRepository imageRepository;
         private readonly UserManager<ApplicationUsers> userManager;
-        public AdminController(IimageRepository imageRepository, ICategoryRepository categoryRepository, IArticleRepository articleRepository, IUploadFileRepository uploadFileRepository, IHostingEnvironment hostingEnvironment, UserManager<ApplicationUsers> userManager)
+        private readonly SignInManager<ApplicationUsers> _signInManager;
+
+        public AdminController(IimageRepository imageRepository, ICategoryRepository categoryRepository, IArticleRepository articleRepository,
+            IUploadFileRepository uploadFileRepository, IHostingEnvironment hostingEnvironment,
+            UserManager<ApplicationUsers> userManager,SignInManager<ApplicationUsers> signInManager)
         {
+            _signInManager = signInManager;
             this.categoryRepository = categoryRepository;
             this.articleRepository = articleRepository;
             this._hostingEnvironment = hostingEnvironment;
@@ -444,7 +449,12 @@ namespace HelpDesk.MVC.Controllers
             ViewBag.ViewTitle = "فرم ایجاد کاربر";
             return View(model);
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+             return Redirect("/Home");
+        }
 
     }
 }

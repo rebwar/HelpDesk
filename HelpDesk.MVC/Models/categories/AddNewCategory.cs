@@ -29,6 +29,7 @@ namespace HelpDesk.MVC.Models.categories
         public List<int> Count { get; set; }
         public List<string> CategoryName { get; set; }
         public string ImagePath { get; set; }
+        public List<int> ArticleId { get; set; }
 
     }
     public class NameCount:DesplayCategoryCount

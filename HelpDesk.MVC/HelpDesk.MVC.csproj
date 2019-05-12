@@ -13,6 +13,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Home\js\script.js" />
+    <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Bold.woff2" />
+    <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Light.woff2" />
+    <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Medium.woff2" />
+    <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Thin.woff2" />
+    <None Include="wwwroot\Home\style\fonts\woff2\Vazir.woff2" />
+    <None Include="wwwroot\Home\style\js\holder.min.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\persiandatepicker\calendar.js" />
     <None Include="wwwroot\persiandatepicker\jquery.Bootstrap-PersianDateTimePicker.js" />

@@ -1,0 +1,66 @@
+﻿@model HelpDesk.MVC.Models.Login.LoginViewModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    Layout = null;
+}
+
+
+<!doctype html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Floating labels example · Bootstrap 4 RTL</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/login/bootstrap.css" rel="stylesheet" />
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+
+        media (min-width: 768px) {
+            .bd-placeholder-img-lg
+
+        {
+            font-size: 3.5rem;
+        }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/login/floating-labels.rtl.css" rel="stylesheet" />
+</head>
+<body>
+    <form method="post" asp-action="Login" asp-controller="Home" class="form-signin">
+        <div class="form-label-group">
+            <input asp-for="UserName" type="text" id="inputEmail" class="form-control number" placeholder="Email address" required autofocus>
+            <label for="inputEmail">کد استخدامی</label>
+        </div>
+
+        <div class="form-label-group">
+            <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <label for="inputPassword">کلمه عبور</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" asp-for="RememberMe"> به خاطر بسپار
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">ورود</button>
+        <br />
+        <p class="text-center">
+            <a asp-action="Index" class="text-decoration-none" asp-controller="Home">بازگشت به صفحه اصلی</a>
+        </p>
+        <p>
+           @ViewBag.loginFailText
+        </p>
+    </form>
+</body>
+</html>
