@@ -47,6 +47,7 @@
     <Folder Include="Views\Shared\Admin\" />
     <Folder Include="wwwroot\Images\Multi\" />
     <Folder Include="wwwroot\Images\Content\" />
+    <Folder Include="wwwroot\Images\Category\" />
     <Folder Include="wwwroot\Images\Profile\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>

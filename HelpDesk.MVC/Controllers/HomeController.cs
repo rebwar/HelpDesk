@@ -38,13 +38,12 @@ namespace HelpDesk.MVC.Controllers
                        select new NameCount
                        {
                            Name = g.Key,
-                           ArticleTitle=g.ToList() ,
+                           ArticleTitle=g.Take(5).ToList() ,
                            Count=g.Count()
                            };
             nameCount = test.ToList();
 
-            ViewBag.Tops = nameCount;
-                    
+            ViewBag.Tops = nameCount;              
                 
             
             var TopArticles = articleRepository.GetTopViewedArticles(5);

@@ -22,7 +22,7 @@ namespace HelpDesk.MVC.Service
             string path_to_file = path_root + innerPath + newFileName;
             using (var stream = new FileStream(path_to_file, FileMode.Create))
             {
-                file.CopyToAsync(stream);
+                file.CopyTo(stream);
                 
             }
             return newFileName;

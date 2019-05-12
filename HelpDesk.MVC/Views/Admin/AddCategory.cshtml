@@ -10,7 +10,7 @@
         <small>درج گروه جدید</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a asp-action="Index" asp-controller="Admin" ><i class="fa fa-dashboard"></i> داشبورد</a></li>
+        <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
         <li class="active">گروه جدید</li>
     </ol>
 </section>
@@ -37,17 +37,42 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Description" class="control-label">توضیحات</label>
-                            <textarea asp-for="Description" class="form-control input-lg text-body" maxlength="200" rows="5"></textarea>
-
+                            <label asp-for="ImagePath" class="control-label"></label>
+                            <div class="form-horizontal">
+                                <input asp-for="ImagePath" type="file" id="files" name="files" />
+                                <input type="button" onclick="UploadImage()" id="btnupload" class="btn btn-info" value="آپلود و نمایش تصویر" />
+                            </div>
+                            <span asp-validation-for="ImagePath" class="text-danger"></span>
                         </div>
-                    </div>
-                    <!-- /.box-body -->
+                        <div class="form-group">
+                            <img id="imguser" class="img-bordered col-md-12 col-xs-12 col-sm-12"
+                                 src="~/Images/Category/default.png" alt="UserImage"
+                                 style="height:150px;" />
+                        </div>
+                        <div id="divmessage" class="text-center hidden" style="color:green;">
 
-                    <div class="box-footer">
-                        <input type="submit" value="افزودن" class="btn btn-block btn-success btn-lg" />
-                    </div>
-                </form>
+
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">توضیحات</label>
+                                <textarea asp-for="Description" class="form-control input-lg text-body" maxlength="200" rows="5"></textarea>
+
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <input type="submit" value="افزودن" class="btn btn-block btn-success btn-lg" />
+                        </div>
+                        <input type="text" class="hidden" id="imagename" name="imagename" />
+
+</form>
+                @if (ViewBag.SuccessMessage != "")
+                {
+                    <span style="color:green;">
+                        @ViewBag.SuccessMessage
+                    </span>
+                }
+
             </div>
         </div>
     </div>
@@ -56,5 +81,43 @@
     </div>
 
 </section>
+<script>
+        var UploadImage = function () {
+            var data = new FormData;
+            var file = $("#files").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('files', files[i]);
+            }
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadCatImage","Admin", new { area = "AdminPanel"})',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (result) {
+                if (result.status == "success") {
+
+                    $("#imguser").attr('src', "\\Images\\Category\\" + result.imagename);
+                    $("#divmessage").removeClass('hidden');
+                    $("#divmessage").text("تصویر با موفقیت آپلود شد");
+                    $("#imagename").val(result.imagename);
+                    }
+                }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#divmessage").removeClass('hidden');
+                        $("#divmessage").text("در هنگام آپلود مشکلی رخ داد");
+
+                    }
+                });
+
+        }
+
+
+
+</script>
+
 
 

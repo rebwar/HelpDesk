@@ -17,6 +17,9 @@ namespace HelpDesk.MVC.Models.categories
         public string Name { get; set; }
         [StringLength(200,ErrorMessage ="حداکثر طول رشته نباید از 200 کاراکتر بیشتر باشد")]
         public string Description { get; set; }
+
+        public string ImagePath { get; set; }
+
     }
     public class DesplayCategoryCount
     {
@@ -25,6 +28,8 @@ namespace HelpDesk.MVC.Models.categories
         public List<Category> Categories { get; set; }
         public List<int> Count { get; set; }
         public List<string> CategoryName { get; set; }
+        public string ImagePath { get; set; }
+
     }
     public class NameCount:DesplayCategoryCount
     {

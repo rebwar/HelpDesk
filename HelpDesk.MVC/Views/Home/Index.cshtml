@@ -50,8 +50,14 @@
                                 @item.Name
                                 (@item.ArticleTitle.Count())
                             </h3>
-                            <p>
-                            </p>
+                            @foreach (var item2 in item.ArticleTitle)
+                            {
+                                <p>
+
+                                    @item2.Title
+                                </p>
+
+                            }
 
                         </div>
                     </div>

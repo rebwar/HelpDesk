@@ -50,15 +50,32 @@ namespace HelpDesk.MVC.Controllers
         {
             return View();
         }
+        public IActionResult UploadCatImage(IFormFile files)
+        {
+            //"upload\\userimage\\normalimage\\"
+            //"\\upload\\userimage\\thumbnailimage\\"
+            string newFileName = uploadFileRepository.UplaodFile(files, "\\Images\\Category\\");
+            return Json(new { status = "success", message = "تصویر با موفقیت آپلود شد.", imagename = newFileName });
+        }
+
         [HttpPost]
-        public IActionResult AddCategory(AddNewCategory model)
+        public IActionResult AddCategory(AddNewCategory model, string imagename)
         {
             if (ModelState.IsValid)
             {
+                if (imagename == null)
+                {
+                    model.ImagePath = "default.png";
+                }
+                else
+                {
+                    model.ImagePath = imagename;
+                }
                 Category category = new Category
                 {
                     Name = model.Name,
-                    Description = model.Description
+                    Description = model.Description,
+                    ImagePath=model.ImagePath                    
                 };
                 categoryRepository.Add(category);
             }
@@ -126,7 +143,7 @@ namespace HelpDesk.MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddArticle(AddNewArticleGetViewModel model)
+        public  ActionResult AddArticle(AddNewArticleGetViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -143,35 +160,28 @@ namespace HelpDesk.MVC.Controllers
                     ViewCount=0
                     
                 };
+                string FileName = "";
+
                 if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType == "image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
                 {
-                    string path_root = _hostingEnvironment.WebRootPath;
-                    string path_to_image = path_root + "\\Images\\" + model.Image.FileName;
-                    using (var stream = new FileStream(path_to_image, FileMode.Create))
-                    {
-                        await model.Image.CopyToAsync(stream);
-                    }
-                    article.Image = @"~/images/" + model.Image.FileName;
+                    //string path_root = _hostingEnvironment.WebRootPath;
+                    //string path_to_image = path_root + "\\Images\\" + model.Image.FileName;
+                    //using (var stream = new FileStream(path_to_image, FileMode.Create))
+                    //{
+                    //    await model.Image.CopyToAsync(stream);
+                    //}
+                    FileName = uploadFileRepository.UplaodFile(model.Image, "\\Images\\");
+                    article.Image = @"~/images/" + FileName;
                 }
                 if ((model?.Video?.Length > 0) && (model?.Video?.ContentType == "video/mp4"))
                 {
-                    string path_root = _hostingEnvironment.WebRootPath;
-                    string path_to_video = path_root + "\\Video\\" + model.Video.FileName;
-                    using (var stream = new FileStream(path_to_video, FileMode.Create))
-                    {
-                        await model.Video.CopyToAsync(stream);
-                    }
-                    article.Video = @"~/video/" + model.Video.FileName;
+                    FileName = uploadFileRepository.UplaodFile(model.Video, "\\Video\\");
+                    article.Video = @"~/video/" + FileName;
                 }
                 if ((model?.PDF?.Length > 0) && (model?.PDF?.ContentType == "application/pdf"))
                 {
-                    string path_root = _hostingEnvironment.WebRootPath;
-                    string path_to_pdf = path_root + "\\Pdf\\" + model.PDF.FileName;
-                    using (var stream = new FileStream(path_to_pdf, FileMode.Create))
-                    {
-                        await model.PDF.CopyToAsync(stream);
-                    }
-                    article.PDF = @"~/pdf/" + model.PDF.FileName;
+                    FileName = uploadFileRepository.UplaodFile(model.PDF, "\\Pdf\\");
+                    article.PDF = @"~/pdf/" + FileName;
                 }
 
 
@@ -378,18 +388,9 @@ namespace HelpDesk.MVC.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> UploadFile(IFormFile files)
+        public IActionResult UploadFile(IFormFile files)
         {
-            //"upload\\userimage\\normalimage\\"
-            //"\\upload\\userimage\\thumbnailimage\\"
             string newFileName = uploadFileRepository.UplaodFile(files, "\\Images\\Profile\\");
-            string path_root = _hostingEnvironment.WebRootPath;
-            string path_to_video = path_root + "\\Images\\Profile\\" + newFileName;
-            using (var stream = new FileStream(path_to_video, FileMode.Create))
-            {
-                await files.CopyToAsync(stream);
-            }
-
             return Json(new { status = "success", message = "تصویر با موفقیت آپلود شد.", imagename = newFileName });
 
         }

@@ -110,6 +110,8 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(200);
 
+                    b.Property<string>("ImagePath");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);
