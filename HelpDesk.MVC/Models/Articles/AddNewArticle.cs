@@ -29,6 +29,7 @@ namespace HelpDesk.MVC.Models.Articles
         public string VideoPath { get; set; }
         public string PDFPath { get; set; }
         public IFormFile PDF { get; set; }
+        public string CategoryName { get; set; }
 
     }
     public class DisplayArticleCategory:AddNewArticle
@@ -39,5 +40,11 @@ namespace HelpDesk.MVC.Models.Articles
     public class AddNewArticleGetViewModel : AddNewArticle
     {
         public int SelectedCat { get; set; }
+    }
+   public class DisplayArticle: AddNewArticle
+    {
+        public List<Article> Articles { get; set; }
+        public Article ResultArticle { get; set; }
+
     }
 }

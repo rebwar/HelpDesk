@@ -14,6 +14,7 @@ using HelpDesk.Domain.Contracts.Categories;
 using HelpDesk.MVC.Models.Login;
 using Microsoft.AspNetCore.Identity;
 using HelpDesk.MVC.Models.Users;
+using HelpDesk.MVC.Models.Articles;
 
 namespace HelpDesk.MVC.Controllers
 {
@@ -85,11 +86,16 @@ namespace HelpDesk.MVC.Controllers
         public IActionResult SearchDetail(int id)
         {
             var model = articleRepository.Get(id);
+            DisplayArticle displayArticle = new DisplayArticle();
             Article article = new Article();
             article = model;
-            article.ViewCount = article.ViewCount + 1;                
+            article.ViewCount = article.ViewCount + 1;
             articleRepository.Update(model);
-            return View(model);
+            displayArticle.ResultArticle = article;
+            //displayArticle.ResultArticle = model;
+           displayArticle.Articles=articleRepository.GetAll().Take(2).ToList();
+
+            return View(displayArticle);
         }
         public IActionResult Login()
         {

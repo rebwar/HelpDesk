@@ -62,8 +62,6 @@ namespace HelpDesk.MVC.Controllers
         }
         public IActionResult UploadCatImage(IFormFile files)
         {
-            //"upload\\userimage\\normalimage\\"
-            //"\\upload\\userimage\\thumbnailimage\\"
             string newFileName = uploadFileRepository.UplaodFile(files, "\\Images\\Category\\");
             return Json(new { status = "success", message = "تصویر با موفقیت آپلود شد.", imagename = newFileName });
         }
@@ -174,12 +172,6 @@ namespace HelpDesk.MVC.Controllers
 
                 if ((model?.Image?.Length > 0) && ((model?.Image?.ContentType == "image/jpeg") || (model?.Image?.ContentType == "image/jpg")))
                 {
-                    //string path_root = _hostingEnvironment.WebRootPath;
-                    //string path_to_image = path_root + "\\Images\\" + model.Image.FileName;
-                    //using (var stream = new FileStream(path_to_image, FileMode.Create))
-                    //{
-                    //    await model.Image.CopyToAsync(stream);
-                    //}
                     FileName = uploadFileRepository.UplaodFile(model.Image, "\\Images\\");
                     article.Image = @"~/images/" + FileName;
                 }
@@ -354,7 +346,6 @@ namespace HelpDesk.MVC.Controllers
         {
             var name2 = name;
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile file, Article article, string name, int request)
