@@ -34,7 +34,7 @@ namespace HelpDesk.MVC.Models.Users
         [Required(AllowEmptyStrings = false, ErrorMessage = PublicConst.EnterMessage)]
         public string FirstName { get; set; }
 
-        [Display(Name = "فامیلی")]
+        [Display(Name = "نام خانوادگی")]
         [Required(AllowEmptyStrings = false, ErrorMessage = PublicConst.EnterMessage)]
         public string LastName { get; set; }
 

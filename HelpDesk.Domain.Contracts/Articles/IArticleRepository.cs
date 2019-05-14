@@ -14,6 +14,7 @@ namespace HelpDesk.Domain.Contracts.Articles
         List<Article> GetTopViewedArticles(int ArticleNumbers);
         List<Article> SearchArticle(string search);
         int GetVisitCount();
+        List<Article> GetArticlesDesc();
 
     }
 }

@@ -38,8 +38,12 @@ namespace HelpDesk.MVC.Controllers
         {
             DesplayCategoryCount desplayCategory = new DesplayCategoryCount();
             desplayCategory.Categories = categoryRepository.GetAll().ToList();
+            //var query = from t in context.Articles
+            //            orderby t.Id descending
+            //            select t;
 
-            desplayCategory.Articles = articleRepository.GetAll().Distinct().ToList();
+            //desplayCategory.Articles = articleRepository.GetAll().Distinct().ToList();
+            desplayCategory.Articles = articleRepository.GetArticlesDesc();
             desplayCategory.ArticleId = context.Articles.Select(x => x.Id).ToList();
             List<NameCount> nameCount = new List<NameCount>();
             var test = (from c in desplayCategory.Categories
@@ -52,7 +56,7 @@ namespace HelpDesk.MVC.Controllers
                            ArticleTitle=g.Take(5).ToList() ,
                            Count=g.Count()
                            });
-            nameCount = test.Distinct().ToList();
+            nameCount = test.ToList();
 
             ViewBag.Tops = nameCount;              
                 

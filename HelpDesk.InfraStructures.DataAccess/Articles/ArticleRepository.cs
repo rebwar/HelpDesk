@@ -22,6 +22,14 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
             return context.Articles.Where(c => c.CategoryId == id).Count();
         }
 
+        public List<Article> GetArticlesDesc()
+        {
+            
+            return (from t in context.Articles
+                   orderby t.Id descending
+                   select t).ToList();
+        }
+
         public List<Article> GetNewArticles(int ArticleNumbers)
         {
             return context.Articles.OrderByDescending(c => c.Id).Take(ArticleNumbers).ToList();
