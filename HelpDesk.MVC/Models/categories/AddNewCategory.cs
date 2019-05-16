@@ -37,6 +37,7 @@ namespace HelpDesk.MVC.Models.categories
         public int Count { get; set; }
         public string Name { get; set; }
         public List<Article> ArticleTitle { get; set; }
+        public List<Article> TopViewArticle { get; set; }
 
     }
 }

@@ -38,15 +38,10 @@ namespace HelpDesk.MVC.Controllers
         {
             DesplayCategoryCount desplayCategory = new DesplayCategoryCount();
             desplayCategory.Categories = categoryRepository.GetAll().ToList();
-            //var query = from t in context.Articles
-            //            orderby t.Id descending
-            //            select t;
-
-            //desplayCategory.Articles = articleRepository.GetAll().Distinct().ToList();
             desplayCategory.Articles = articleRepository.GetArticlesDesc();
             desplayCategory.ArticleId = context.Articles.Select(x => x.Id).ToList();
             List<NameCount> nameCount = new List<NameCount>();
-            var test = (from c in desplayCategory.Categories
+            var FiveNewArticles = (from c in desplayCategory.Categories
                        join p in desplayCategory.Articles on c.Id equals p.CategoryId
                        group p by c.Name into g                       
                        select new NameCount
@@ -55,9 +50,10 @@ namespace HelpDesk.MVC.Controllers
                            ArticleTitle=g.Take(5).ToList() ,
                            Count=g.Count()
                            });
-            nameCount = test.ToList();
-            ViewBag.Tops = nameCount;      
-            var TopArticles = articleRepository.GetTopViewedArticles(5);
+            nameCount = FiveNewArticles.ToList();
+            ViewBag.Tops = nameCount;                               
+            var TopsView = articleRepository.GetTopViewedArticles(6);
+            ViewBag.TopsByView = TopsView;
             return View(nameCount);
         }
 
