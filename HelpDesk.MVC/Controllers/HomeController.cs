@@ -50,17 +50,13 @@ namespace HelpDesk.MVC.Controllers
                        join p in desplayCategory.Articles on c.Id equals p.CategoryId
                        group p by c.Name into g                       
                        select new NameCount
-                       {
-                           
+                       {                           
                            Name = g.Key,
                            ArticleTitle=g.Take(5).ToList() ,
                            Count=g.Count()
                            });
             nameCount = test.ToList();
-
-            ViewBag.Tops = nameCount;              
-                
-            
+            ViewBag.Tops = nameCount;      
             var TopArticles = articleRepository.GetTopViewedArticles(5);
             return View(nameCount);
         }

@@ -1,22 +1,43 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light ">
+﻿@using Microsoft.AspNetCore.Identity
+
+<nav class="navbar navbar-expand-lg navbar-light ">
     <div class="container">
         <a class="navbar-brand" href="#">Pars<span>Sup</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <form asp-action="Logout" asp-controller="Admin" method="post">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link active">خانه</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">درباره ما</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">تماس با ما</a></li>
-                <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Home">ورود</a></li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link active">خانه</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">درباره ما</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">تماس با ما</a></li>
+                    @{
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Admin">پنل مدیریت</a></li>
 
-                @*<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modalQuickView" style="cursor:pointer" >ثبت نام</a></li>*@
+                            <li class="nav-item">
+                                <button type="submit" style="text-decoration:none" class="btn btn-link">خروج</button>
+                            </li>
+
+                        }
+                        else
+                        {
+
+                            <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Home">ورود</a></li>
+
+                        }
+
+                    }
+
+                    @*<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#modalQuickView" style="cursor:pointer" >ثبت نام</a></li>*@
 
 
-            </ul>
-        </div>
+                </ul>
+            </div>
+            </form>
     </div>
 
 </nav>

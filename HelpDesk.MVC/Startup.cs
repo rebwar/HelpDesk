@@ -40,14 +40,16 @@ namespace HelpDesk.MVC
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+                
             });
-
+            services.ConfigureApplicationCookie(option => option.AccessDeniedPath = "/Admin/AccessDenied");
             int minPasswordLenght = int.Parse(Configuration["MinPasswordLength"]);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HelpDeskContext>(c => c.UseSqlServer(Configuration.GetConnectionString("HelpDesk")));
             services.AddDbContext<UserDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("UserDb")));
             services.AddIdentity<ApplicationUsers, ApplicaionRoles>(c =>
             {
+                
                 c.User.RequireUniqueEmail = true;
                 c.Password.RequireDigit = false;
                 c.Password.RequiredLength = minPasswordLenght;

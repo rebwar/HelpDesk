@@ -22,9 +22,11 @@ using HelpDesk.MVC.Service;
 using MD.PersianDateTime.Standard;
 using Microsoft.AspNetCore.Identity;
 using HelpDesk.MVC.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HelpDesk.MVC.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly ICategoryRepository categoryRepository;
@@ -56,6 +58,7 @@ namespace HelpDesk.MVC.Controllers
             statistics.Categories = categoryRepository.GetStatistic();
             return View(statistics);
         }
+        [Authorize(Roles ="Admin")]
         public IActionResult AddCategory()
         {
             return View();
@@ -89,6 +92,8 @@ namespace HelpDesk.MVC.Controllers
             }
             return RedirectToAction(nameof(ListCat));
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult ListCat()
         {
             var cat = categoryRepository.GetAll().ToList();
@@ -100,10 +105,12 @@ namespace HelpDesk.MVC.Controllers
             var article = articleRepository.GetAll().ToList();
             return View(article);
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult EditCategory(int id)
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             try
@@ -117,6 +124,7 @@ namespace HelpDesk.MVC.Controllers
                 return BadRequest();
             }
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int Id)
         {
             ViewBag.type = 1;
@@ -128,6 +136,7 @@ namespace HelpDesk.MVC.Controllers
             return PartialView("Details", cat);
 
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int Id)
         {
             var cat = categoryRepository.Get(Id);
@@ -138,6 +147,7 @@ namespace HelpDesk.MVC.Controllers
             return View(cat);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Category category)
         {
             categoryRepository.Update(category);
@@ -378,14 +388,19 @@ namespace HelpDesk.MVC.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult UserList()
         {
                 var userlist = userManager.Users.Take(50).ToList();
                 return View(userlist);
 
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateUser()
+        {
+            return View();
+        }
+        public IActionResult AccessDenied()
         {
             return View();
         }
