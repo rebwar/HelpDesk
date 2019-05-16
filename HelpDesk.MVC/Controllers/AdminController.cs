@@ -40,8 +40,8 @@ namespace HelpDesk.MVC.Controllers
 
         public AdminController(IimageRepository imageRepository, ICategoryRepository categoryRepository, IArticleRepository articleRepository,
             IUploadFileRepository uploadFileRepository, IHostingEnvironment hostingEnvironment,
-            UserManager<ApplicationUsers> userManager,SignInManager<ApplicationUsers> signInManager
-            ,RoleManager<ApplicaionRoles> roleManager)
+            UserManager<ApplicationUsers> userManager, SignInManager<ApplicationUsers> signInManager
+            , RoleManager<ApplicaionRoles> roleManager)
         {
             _signInManager = signInManager;
             this.roleManager = roleManager;
@@ -61,7 +61,7 @@ namespace HelpDesk.MVC.Controllers
             statistics.Categories = categoryRepository.GetStatistic();
             return View(statistics);
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddCategory()
         {
             return View();
@@ -73,6 +73,8 @@ namespace HelpDesk.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public IActionResult AddCategory(AddNewCategory model, string imagename)
         {
             if (ModelState.IsValid)
@@ -89,7 +91,7 @@ namespace HelpDesk.MVC.Controllers
                 {
                     Name = model.Name,
                     Description = model.Description,
-                    ImagePath=model.ImagePath                    
+                    ImagePath = model.ImagePath
                 };
                 categoryRepository.Add(category);
             }
@@ -164,7 +166,7 @@ namespace HelpDesk.MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  ActionResult AddArticle(AddNewArticleGetViewModel model)
+        public ActionResult AddArticle(AddNewArticleGetViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -177,9 +179,9 @@ namespace HelpDesk.MVC.Controllers
                     PublishDate = persiandate.ToString(),
                     Status = ArticleStatus.Publish,
                     CategoryId = model.SelectedCat,
-                    Likes=0,
-                    ViewCount=0
-                    
+                    Likes = 0,
+                    ViewCount = 0
+
                 };
                 string FileName = "";
 
@@ -394,8 +396,8 @@ namespace HelpDesk.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult UserList()
         {
-                var userlist = userManager.Users.Take(50).ToList();
-                return View(userlist);
+            var userlist = userManager.Users.Take(50).ToList();
+            return View(userlist);
 
         }
         [Authorize(Roles = "Admin")]
@@ -415,7 +417,7 @@ namespace HelpDesk.MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult CreateUser(UserViewModel model, string imagename)
+        public IActionResult CreateUser(UserViewModel model, string imagename)
         {
             if (ModelState.IsValid)
             {
@@ -437,13 +439,13 @@ namespace HelpDesk.MVC.Controllers
                         PhoneNumber = model.PhoneNumber,
                         UserName = model.UserName,
                         Email = model.Email,
-                        
+
                         Gender = model.gender,
                         BirthDate = model.BirthDayDate,
                         ProfileImage = model.UserImage
                     };
 
-                    var result =  userManager.CreateAsync(user, model.Password).Result;
+                    var result = userManager.CreateAsync(user, model.Password).Result;
                     if (result.Succeeded)
                     {
                         return RedirectToAction(nameof(Index));
@@ -462,19 +464,49 @@ namespace HelpDesk.MVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-             return Redirect("/Home");
+            return Redirect("/Home");
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Roles()
         {
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
         [Authorize(Roles = "Admin")]
-        public IActionResult deleterole(string id)
+
+        public IActionResult EditRole(string Id)
+        {
+            var findrole = roleManager.FindByIdAsync(Id).Result;
+            return View(findrole);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+
+        public IActionResult EditRole(string Id, string Name)
+        {
+            ApplicaionRoles findrole = roleManager.FindByIdAsync(Id).Result;
+            findrole.Name = Name;
+            var result = roleManager.UpdateAsync(findrole).Result;
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Roles));
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.Code, item.Description);
+                }
+            }
+            return View(findrole);
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult deleterole(string Id)
         {
             try
             {
-                var findrole = roleManager.FindByIdAsync(id).Result;
+                var findrole = roleManager.FindByIdAsync(Id).Result;
                 var role = roleManager.DeleteAsync(findrole).Result;
                 return Ok();
             }
@@ -493,9 +525,11 @@ namespace HelpDesk.MVC.Controllers
             {
                 return BadRequest();
             }
-            return PartialView("DetailsRole", findrole);
+            return PartialView("Detailsrole", findrole);
 
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult AddRole()
         {
             return View();
@@ -503,10 +537,56 @@ namespace HelpDesk.MVC.Controllers
         [HttpPost]
         public IActionResult AddRole(ApplicaionRoles roles)
         {
-           var result= roleManager.CreateAsync(roles).Result;
+            var result = roleManager.CreateAsync(roles).Result;
             return RedirectToAction(nameof(Roles));
         }
+        public IActionResult RoleForUser(string Id)
+        {
+            UserRoleViewModel application = new UserRoleViewModel();
+            application.User = userManager.FindByIdAsync(Id).Result;
+            application.ApplicaionRoles = roleManager.Roles.ToList();
+            return View(application);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
 
+        public IActionResult RoleForUser(string Id, List<string> Roles)
+        {
 
+            UserRoleViewModel application = new UserRoleViewModel
+            {
+                User = userManager.FindByIdAsync(Id).Result
+            };
+            if (Roles.Count() != 0)
+            {
+                IList<string> RolesBelongUser;
+                RolesBelongUser = userManager.GetRolesAsync(application.User).Result;
+                var removeResult = userManager.RemoveFromRolesAsync(application.User, RolesBelongUser).Result;
+                if (!removeResult.Succeeded)
+                {
+                    foreach (var item in removeResult.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+                var result = userManager.AddToRolesAsync(application.User, Roles).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(UserList));
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+            }
+            else
+            {
+                application.ApplicaionRoles = roleManager.Roles.ToList();
+            }
+            return View(application);
+        }
     }
 }

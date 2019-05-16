@@ -50,7 +50,7 @@
                                     تیتر مطلب
                                 </th>
                                 <th>
-                                   تاریخ انتشار
+                                    تاریخ انتشار
                                 </th>
                                 <th></th>
                             </tr>
@@ -58,21 +58,35 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PublishDate)
-                                </td>
+                                <tr>
 
+                                    @{
+                                        int stringlenght = item.Title.Length;
+                                        if (stringlenght > 20)
+                                        {
+                                            <td>
+                                                @item.Title.Substring(0, 20)
+                                            </td>
+                                        }
+                                        else
+                                        {
                                 <td>
-                                    <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>جزئیات </a>
-                                    <a asp-controller="Admin" asp-action="upload" asp-route-id="@item.Id" class="btn btn-success" data-id="@item.Id"><i class="fa fa-image"></i> عکس سه بعدی </a>
-                                    <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
-                                    <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                    @item.Title
                                 </td>
-                            </tr>
+                                        }
+                                    }
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PublishDate)
+                                    </td>
+
+                                    <td>
+                                        <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>جزئیات </a>
+                                        <a asp-controller="Admin" asp-action="upload" asp-route-id="@item.Id" class="btn btn-success" data-id="@item.Id"><i class="fa fa-image"></i> عکس سه بعدی </a>
+                                        <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
+                                        <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

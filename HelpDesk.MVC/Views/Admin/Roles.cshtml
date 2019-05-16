@@ -1,4 +1,4 @@
-﻿@model List<HelpDesk.MVC.Models.Users.ApplicaionRoles>
+﻿@model IEnumerable<HelpDesk.MVC.Models.Users.ApplicaionRoles>
 @{
     ViewData["Title"] = "Roles";
     Layout = "~/Views/Admin/_Layout.cshtml";
@@ -20,7 +20,7 @@
     }
 </style>
 
-}
+
 <section class="content">
     <div class="row">
 
@@ -58,9 +58,24 @@
                                         @Html.DisplayFor(modelItem => item.Name)
                                     </td>
                                     <td>
-                                        <a asp-controller="Admin" asp-action="EditRole" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
                                         <a href="javascript:void(0);" class="anchorDetail btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i> جزئیات</a>
-                                        <a class="btn btn-danger delete" data-id="@item.Id" data-controller="Admin" data-action="deletetole" data-body-message="برای حذف این نقش مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                        @{
+                                            if (item.Name == "Admin")
+                                            {
+                                                <span class="bg-warning">
+                                                    عدم اجازه حذف
+                                                </span>
+                                                <span class="bg-blue-gradient">
+                                                    عدم اجازه ویرایش
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Admin" asp-action="EditRole" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
+
+                                                <a class="btn btn-danger delete" data-id="@item.Id" data-controller="Admin" data-action="deleterole" data-body-message="برای حذف این نقش مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                            }
+                                        }
                                     </td>
                                 </tr>
                             }

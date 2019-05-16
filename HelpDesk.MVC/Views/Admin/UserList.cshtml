@@ -57,7 +57,9 @@
                                 <td>@item.UserName</td>
                                 <td>@item.Email</td>
                                 <td>@item.PhoneNumber</td>
-                                <td><span class="label label-success">sdsa</span></td>
+                                <td>
+                                    <a asp-controller="Admin" asp-action="RoleForUser" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>مدیریت نقش </a>
+                                </td>
                                 <tr></tr>
 
                             }

@@ -38,7 +38,13 @@
 </head>
 <body>
     <form method="post" asp-action="Login" asp-controller="Home" class="form-signin">
+        <p class="text-danger center-block JustifyCenter">
+            @ViewBag.loginFailText
+        </p>
+
+
         <div class="form-label-group">
+
             <input asp-for="UserName" type="text" id="inputEmail" class="form-control number" placeholder="Email address" required autofocus>
             <label for="inputEmail">کد استخدامی</label>
         </div>
@@ -57,9 +63,6 @@
         <br />
         <p class="text-center">
             <a asp-action="Index" class="text-decoration-none" asp-controller="Home">بازگشت به صفحه اصلی</a>
-        </p>
-        <p>
-           @ViewBag.loginFailText
         </p>
     </form>
 </body>

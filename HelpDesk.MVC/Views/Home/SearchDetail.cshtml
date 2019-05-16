@@ -15,9 +15,6 @@
 
         <div class="section-title">
 
-            @*<span>خدمات</span>
-                <h3>ما بهترین خدمات برای مشتریان شما را ارائه می دهیم</h3>
-                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. </p>*@
             <div class="row mb-2">
                 @foreach (var item in Model.Articles)
                 {
@@ -97,7 +94,7 @@
                                 تعداد بازدید مطلب: @Model.ResultArticle.ViewCount
                             </p>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <button type="submit" class="btn btn-app">مطلب را پسندیدم</button>
                         </div>
 

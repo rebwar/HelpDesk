@@ -30,6 +30,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
                    select t).ToList();
         }
 
+
         public List<Article> GetNewArticles(int ArticleNumbers)
         {
             return context.Articles.OrderByDescending(c => c.Id).Take(ArticleNumbers).ToList();
