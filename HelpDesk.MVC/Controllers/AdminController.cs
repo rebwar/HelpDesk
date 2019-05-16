@@ -36,12 +36,15 @@ namespace HelpDesk.MVC.Controllers
         private readonly IimageRepository imageRepository;
         private readonly UserManager<ApplicationUsers> userManager;
         private readonly SignInManager<ApplicationUsers> _signInManager;
+        private readonly RoleManager<ApplicaionRoles> roleManager;
 
         public AdminController(IimageRepository imageRepository, ICategoryRepository categoryRepository, IArticleRepository articleRepository,
             IUploadFileRepository uploadFileRepository, IHostingEnvironment hostingEnvironment,
-            UserManager<ApplicationUsers> userManager,SignInManager<ApplicationUsers> signInManager)
+            UserManager<ApplicationUsers> userManager,SignInManager<ApplicationUsers> signInManager
+            ,RoleManager<ApplicaionRoles> roleManager)
         {
             _signInManager = signInManager;
+            this.roleManager = roleManager;
             this.categoryRepository = categoryRepository;
             this.articleRepository = articleRepository;
             this._hostingEnvironment = hostingEnvironment;
@@ -461,6 +464,49 @@ namespace HelpDesk.MVC.Controllers
             await _signInManager.SignOutAsync();
              return Redirect("/Home");
         }
+        public IActionResult Roles()
+        {
+            var roles = roleManager.Roles.ToList();
+            return View(roles);
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult deleterole(string id)
+        {
+            try
+            {
+                var findrole = roleManager.FindByIdAsync(id).Result;
+                var role = roleManager.DeleteAsync(findrole).Result;
+                return Ok();
+            }
+            catch (Exception exp)
+            {
+                return BadRequest();
+            }
+        }
+        [Authorize(Roles = "Admin")]
+        public IActionResult Detailsrole(string Id)
+        {
+            ViewBag.type = 1;
+            var findrole = roleManager.FindByIdAsync(Id).Result;
+
+            if (findrole == null)
+            {
+                return BadRequest();
+            }
+            return PartialView("DetailsRole", findrole);
+
+        }
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddRole(ApplicaionRoles roles)
+        {
+           var result= roleManager.CreateAsync(roles).Result;
+            return RedirectToAction(nameof(Roles));
+        }
+
 
     }
 }

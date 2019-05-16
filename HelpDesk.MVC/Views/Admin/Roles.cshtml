@@ -1,0 +1,112 @@
+﻿@model List<HelpDesk.MVC.Models.Users.ApplicaionRoles>
+@{
+    ViewData["Title"] = "Roles";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<style>
+    .example-modal .modal {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        display: block;
+        z-index: 1;
+    }
+
+    .example-modal .modal {
+        background: transparent !important;
+    }
+</style>
+
+}
+<section class="content">
+    <div class="row">
+
+
+
+
+
+        <!-- left column -->
+        <div class="col-md-11">
+            <!-- general form elements -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> لیست نقش ها</h3>
+                </div>
+                <br />
+
+                <p style="padding-right:15px">
+                    <a asp-action="AddRole" class="btn btn-success btn-lg justify-content-center"><i class="fa fa-plus"></i> ایجاد نقش</a>
+                </p>
+                <div class="box-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    نام نقش
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Admin" asp-action="EditRole" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
+                                        <a href="javascript:void(0);" class="anchorDetail btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i> جزئیات</a>
+                                        <a class="btn btn-danger delete" data-id="@item.Id" data-controller="Admin" data-action="deletetole" data-body-message="برای حذف این نقش مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+@section Details_Modal
+{
+    <script src="~/js/delete.js"></script>
+
+    <script>
+        var TeamDetailPostBackURL = '/Admin/Detailsrole';
+        $(function () {
+            $(".anchorDetail").click(function () {
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                $.ajax({
+                    type: "GET",
+                    url: TeamDetailPostBackURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        $('#myModalContent').html(data);
+                        $('#modal-primary').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+<div id='modal-primary' class='modal modal-info fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+

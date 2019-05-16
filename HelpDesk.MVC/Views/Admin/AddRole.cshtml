@@ -1,0 +1,53 @@
+﻿@model HelpDesk.MVC.Models.Users.ApplicaionRoles
+
+    @{
+        ViewData["Title"] = "نقش جدید";
+        Layout = "~/Views/Admin/_Layout.cshtml";
+    }
+
+    <section class="content-header">
+        <h1>
+            <small>درج نقش جدید</small>
+        </h1>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"> نقش جدید</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    <form asp-action="AddRole" method="post" asp-controller="Admin">
+
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label">نام نقش</label>
+                                <input asp-for="Name" class="form-control input-lg" maxlength="100" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <input type="submit" value="افزودن" class="btn btn-block btn-success btn-lg" />
+                            </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-info" asp-action="Roles">بازگشت به لیست</a>
+        </div>
+
+    </section>
+
+
+
