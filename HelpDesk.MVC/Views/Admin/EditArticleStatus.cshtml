@@ -1,0 +1,65 @@
+﻿@model HelpDesk.MVC.Models.Articles.DisplayArticleCategory
+
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        <small>ویرایش وضعیت مطلب @Model.Title</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a asp-action="Index" asp-controller="Admin"><i class="fa fa-dashboard"></i> داشبورد</a></li>
+        <li class="active">ویرایش وضعیت مطلب</li>
+    </ol>
+</section>
+<section class="content">
+
+    <div class="row">
+        <div class="col-md-11">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> ویرایش وضعیت مطلب</h3>
+                </div>
+
+                <form asp-action="EditArticleStatus" method="post" asp-controller="Admin">
+                    <input asp-for="Title" hidden class="form-control input-lg" maxlength="500" />
+
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label">تیتر مطلب</label>
+                            <br />
+                            <label asp-for="Title" class="control-label">@Model.Title</label>
+
+                        </div>
+                        <div class="form-group">
+                            <label>انتخاب وضعیت</label>
+                            <select asp-for="Status" asp-items="Html.GetEnumSelectList<HelpDesk.Domain.Core.Articles.ArticleStatus>()" class="form-control input-sm" name="Status"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Abstract" class="control-label">توضیحات</label>
+                            <label asp-for="Abstract" class="control-label">@Model.Abstract</label>
+
+                        </div>
+
+
+                        <div class="box-footer">
+                            <input type="submit" value="ذخیره" class="btn btn-block btn-success btn-lg" />
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <a class="btn btn-info" asp-action="ListArticle">بازگشت به لیست</a>
+
+    </div>
+</section>
+

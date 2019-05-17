@@ -35,6 +35,11 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
                    select t).ToList();
         }
 
+        public int GetArticleStaticsByAuthor(int UserId)
+        {
+            return context.Articles.Where(x => x.AspNetUsersId == UserId).Count();
+
+        }
 
         public List<Article> GetNewArticles(int ArticleNumbers)
         {
@@ -49,12 +54,17 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
 
         public List<Article> GetTopViewedArticles(int ArticleNumbers)
         {
-            return context.Articles.OrderByDescending(c => c.ViewCount).Take(ArticleNumbers).ToList();
+            return context.Articles.OrderByDescending(c => c.ViewCount).Where(x=>x.Status==ArticleStatus.Publish).Take(ArticleNumbers).ToList();
         }
 
         public int GetVisitCount()
         {
             return context.Articles.Sum(x => x.ViewCount);
+        }
+
+        public int GetVisitCountByAuthor(int UserId)
+        {
+            return context.Articles.Where(x => x.AspNetUsersId == UserId).Sum(x => x.ViewCount);
         }
 
         public List<Article> SearchArticle(string search)

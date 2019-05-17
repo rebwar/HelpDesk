@@ -5,64 +5,73 @@
 }
     <section class="content">
         <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3>@Model.Categories</h3>
-                        <p>تعداد گروهها</p> 
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bookmark"></i>
-                    </div>
-                    <a asp-controller="Admin" asp-action="ListCat" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3>@Model.Articles</h3>
+            @{
+                if (ViewBag?.IsAdmin)
+                {
+                    <div class="col-lg-3 col-xs-6">
 
-                        <p>تعداد مطالب</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a asp-controller="Admin" asp-action="listArticle" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>@Model.Users</h3>
+                        <div class="small-box bg-aqua">
+                            <div class="inner">
+                                <h3>@Model.Categories</h3>
+                                <p>تعداد گروهها</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bookmark"></i>
+                            </div>
+                            <a asp-controller="Admin" asp-action="ListCat" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>@Model.Users</h3>
 
-                        <p>کاربران ثبت شده</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    <a asp-controller="Admin" asp-action="UserList" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3>@Model.PageVisited</h3>
+                                    <p>کاربران ثبت شده</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                </div>
+                                <a asp-controller="Admin" asp-action="UserList" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                            </div>
+                        </div>
 
-                        <p>بازدید مطالب</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                    </div>
-                    <a href="#" class="small-box-footer"> <i class="fa "></i></a>
-                </div>
-            </div>
 
-        </div>
+                        }
+                        }
+                        <!-- small box -->
+              
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>@Model.Articles</h3>
+
+                                <p>تعداد مطالب</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a asp-controller="Admin" asp-action="listArticle" class="small-box-footer">اطلاعات بیشتر <i class="fa fa-arrow-circle-left"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>@Model.PageVisited</h3>
+
+                                <p>بازدید مطالب</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="#" class="small-box-footer"> <i class="fa "></i></a>
+                        </div>
+                    </div>
+
+                </div>
     </section>

@@ -30,6 +30,8 @@ namespace HelpDesk.MVC.Models.Articles
         public string PDFPath { get; set; }
         public IFormFile PDF { get; set; }
         public string CategoryName { get; set; }
+        public int AspNetUsersId { get; set; }
+
 
     }
     public class DisplayArticleCategory:AddNewArticle

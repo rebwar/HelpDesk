@@ -39,11 +39,12 @@ namespace HelpDesk.MVC.Controllers
             DesplayCategoryCount desplayCategory = new DesplayCategoryCount();
             desplayCategory.Categories = categoryRepository.GetAll().ToList();
             desplayCategory.Articles = articleRepository.GetArticlesDesc();
+            
             desplayCategory.ArticleId = context.Articles.Select(x => x.Id).ToList();
             List<NameCount> nameCount = new List<NameCount>();
             var FiveNewArticles = (from c in desplayCategory.Categories
-                       join p in desplayCategory.Articles on c.Id equals p.CategoryId
-                       group p by c.Name into g                       
+                       join p in desplayCategory.Articles on c.Id equals p.CategoryId where p.Status== ArticleStatus.Publish
+                                   group p by c.Name into g                       
                        select new NameCount
                        {                           
                            Name = g.Key,
@@ -88,7 +89,6 @@ namespace HelpDesk.MVC.Controllers
             article.ViewCount = article.ViewCount + 1;
             articleRepository.Update(model);
             displayArticle.ResultArticle = article;
-            //displayArticle.ResultArticle = model;
            displayArticle.Articles=articleRepository.GetAll().Take(2).ToList();
             return View(displayArticle);
         }

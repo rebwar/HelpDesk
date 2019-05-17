@@ -1,6 +1,16 @@
 ﻿@model IEnumerable<HelpDesk.Domain.Core.Articles.Article>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@inject SignInManager<HelpDesk.MVC.Models.Users.ApplicationUsers> SignInManager
+@inject UserManager<HelpDesk.MVC.Models.Users.ApplicationUsers> UserManager
 
 @{
+    string UserId = UserManager.GetUserId(Context.User);
+    var user = UserManager.FindByIdAsync(UserId).Result;
+    IList<string> RolesBelongUser;
+    RolesBelongUser = UserManager.GetRolesAsync(user).Result;
+
+
     ViewData["Title"] = "ListArticle";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
@@ -52,41 +62,91 @@
                                 <th>
                                     تاریخ انتشار
                                 </th>
+                                <th>
+                                    وضعیت
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
+                            <tr>
 
-                                    @{
-                                        int stringlenght = item.Title.Length;
-                                        if (stringlenght > 20)
-                                        {
-                                            <td>
-                                                @item.Title.Substring(0, 20)
-                                            </td>
-                                        }
-                                        else
-                                        {
+                                @{
+                                    int stringlenght = item.Title.Length;
+                                    if (stringlenght > 20)
+                                    {
+                                        <td>
+                                            @item.Title.Substring(0, 20)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            @item.Title
+                                        </td>
+                                    }
+                                }
+
                                 <td>
-                                    @item.Title
+                                    @Html.DisplayFor(modelItem => item.PublishDate)
                                 </td>
+                                <td>
+                                    @{
+                                        switch (item.Status)
+                                        {
+                                            case HelpDesk.Domain.Core.Articles.ArticleStatus.PrePublish:
+                                                <small class="label label-info"><i class="fa fa-clock-o"></i> منتظر تائید</small>
+                                                break;
+                                            case HelpDesk.Domain.Core.Articles.ArticleStatus.Publish:
+                                                <small class="label label-success"><i class="fa fa-won"></i> منتشر شده</small>
+
+
+                                                break;
+                                            case HelpDesk.Domain.Core.Articles.ArticleStatus.Draft:
+                                                <small class="label label-warning"><i class="fa fa-book"></i> پیش نویش</small>
+
+                                                break;
+                                            case HelpDesk.Domain.Core.Articles.ArticleStatus.Delete:
+                                                <small class="label label-danger"><i class="fa fa-book"></i> بایگانی</small>
+
+
+                                                break;
+                                            default:
+                                                break;
                                         }
                                     }
+                                </td>
+                                @{
+                                    bool HasAdmin = false;
+                                    @foreach (var item2 in RolesBelongUser)
+                                    {
+                                        if (item2 == "Admin")
+                                        {
+                                            HasAdmin = true;
+                                        }
+                                    }
+                                    @if (HasAdmin)
+                                    {
+                                        <td>
+                                            <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>جزئیات </a>
+                                            <a asp-controller="Admin" asp-action="EditArticleStatus" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>تغییر وضعیت </a>
+                                            <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>جزئیات </a>
+                                            <a asp-controller="Admin" asp-action="upload" asp-route-id="@item.Id" class="btn btn-success" data-id="@item.Id"><i class="fa fa-image"></i> عکس سه بعدی </a>
+                                            <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
+                                            <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
+                                        </td>
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PublishDate)
-                                    </td>
-
-                                    <td>
-                                        <a asp-controller="Admin" asp-action="ArticleDetails" asp-route-id="@item.Id" class="btn btn-default" data-id="@item.Id"><i class="fa fa-book"></i>جزئیات </a>
-                                        <a asp-controller="Admin" asp-action="upload" asp-route-id="@item.Id" class="btn btn-success" data-id="@item.Id"><i class="fa fa-image"></i> عکس سه بعدی </a>
-                                        <a asp-controller="Admin" asp-action="EditArticle" asp-route-id="@item.Id" class="btn btn-primary" data-id="@item.Id"><i class="fa fa-edit"></i>ویرایش </a>
-                                        <a class="btn btn-danger deleteArticle" data-id="@item.Id" data-controller="Admin" data-action="deletearticle" data-body-message="برای حذف این مطلب مطمئن هستید؟"><i class="fa fa-trash"></i> حذف</a>
-                                    </td>
-                                </tr>
+                                    }
+                                }
+                            </tr>
                             }
                         </tbody>
                     </table>

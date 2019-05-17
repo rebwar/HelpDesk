@@ -61,11 +61,35 @@ namespace HelpDesk.MVC.Controllers
         {
             Statistics statistics = new Statistics();
             string UserId = userManager.GetUserId(HttpContext.User);
+            UserRoleViewModel userRoleView = new UserRoleViewModel();
+            userRoleView.User = userManager.FindByIdAsync(UserId).Result;
+
+            IList<string> RolesBelongUser = RolesByUser(userRoleView.User);
+            bool HasUserAdmin = false;
+            foreach (var item in RolesBelongUser)
+            {
+                if (item == "Admin")
+                {
+                    HasUserAdmin = true;
+                }
+            }
+            if (HasUserAdmin)
+            {
+                ViewBag.IsAdmin = true;
+                statistics.PageVisited = articleRepository.GetVisitCount();
+                statistics.Users = userManager.Users.Count();
+                statistics.Categories = categoryRepository.GetStatistic();
+                statistics.Articles = articleRepository.GetStatistic();
+
+            }
+            else
+            {
+                ViewBag.IsAdmin = false;
+
+                statistics.PageVisited = articleRepository.GetVisitCountByAuthor(int.Parse(UserId));
+                statistics.Articles = articleRepository.GetArticleStaticsByAuthor(int.Parse(UserId));
+            }
             statistics.User = userManager.FindByIdAsync(UserId).Result;
-            statistics.Articles = articleRepository.GetStatistic();
-            statistics.Users = userManager.Users.Count();
-            statistics.PageVisited = articleRepository.GetVisitCount();
-            statistics.Categories = categoryRepository.GetStatistic();           
             return View(statistics);
         }
         [Authorize(Roles = "Admin")]
@@ -258,7 +282,45 @@ namespace HelpDesk.MVC.Controllers
                 return BadRequest();
             }
         }
-        public IActionResult EditArticle(int Id)
+        public IActionResult EditArticleStatus(int Id)
+        {
+            var article = articleRepository.Get(Id);
+            if (article == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                DisplayArticleCategory displayArticleCategory = new DisplayArticleCategory();
+                displayArticleCategory.Abstract = article.Abstract;
+                displayArticleCategory.Id = article.Id;
+                displayArticleCategory.PublishDate = article.PublishDate;
+                displayArticleCategory.Status = article.Status;
+                displayArticleCategory.Title = article.Title;
+                return View(displayArticleCategory);
+            }
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditArticleStatus( Article article,int Id)
+        {
+
+            if (ModelState.IsValid)
+            {                
+                Article article1 = new Article();
+                article1= articleRepository.Get(Id);
+                article1.Status = article.Status;
+                articleRepository.Update(article1);
+                return RedirectToAction(nameof(ListArticle));
+            }
+            else
+            {
+                return View(article);
+
+            }
+        }
+            public IActionResult EditArticle(int Id)
         {
             var article = articleRepository.Get(Id);
             if (article == null)
@@ -277,40 +339,77 @@ namespace HelpDesk.MVC.Controllers
                 displayArticleCategory.PublishDate = article.PublishDate;
                 displayArticleCategory.Status = article.Status;
                 displayArticleCategory.Title = article.Title;
+                displayArticleCategory.AspNetUsersId = article.AspNetUsersId;
+                
                 return View(displayArticleCategory);
             }
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> EditArticle(AddNewArticleGetViewModel displayArticle, Article article)
+        public IActionResult EditArticle(AddNewArticleGetViewModel displayArticle, Article article)
         {
             if (ModelState.IsValid)
             {
                 var oldImagePath = displayArticle.ImagePath.Remove(0, 9);
+                
+
                 article.CategoryId = displayArticle.SelectedCat;
+                string FileName = "";
+                string path_root = _hostingEnvironment.WebRootPath;
+
                 if ((displayArticle?.Image?.Length > 0) && ((displayArticle?.Image?.ContentType == "image/jpeg") || (displayArticle?.Image?.ContentType == "image/jpg")))
                 {
-
-                    string path_root = _hostingEnvironment.WebRootPath;
                     string path_Old_Image = path_root + "\\Images\\" + oldImagePath;
                     string path_to_image = path_root + "\\Images\\" + displayArticle.Image.FileName;
-                    using (var stream = new FileStream(path_to_image, FileMode.Create))
-                    {
-                        await displayArticle.Image.CopyToAsync(stream);
-                    }
-                    article.Image = @"~/images/" + displayArticle.Image.FileName;
+                    FileName = uploadFileRepository.UplaodFile(displayArticle.Image, "\\Images\\");
+                    article.Image = @"~/images/" + FileName;
                     System.IO.File.Delete(path_Old_Image);
 
-                    articleRepository.Update(article);
-                    return RedirectToAction(nameof(ListArticle));
                 }
                 else
                 {
                     article.Image = displayArticle.ImagePath;
-                    articleRepository.Update(article);
-                    return RedirectToAction(nameof(ListArticle));
+                }
+                if ((displayArticle?.Video?.Length > 0) && (displayArticle?.Video?.ContentType == "video/mp4"))
+                {
+                    if(displayArticle.VideoPath==null)
+                    {
+
+                    }
+                    else
+                    {
+                        var oldVideoPath = displayArticle.VideoPath.Remove(0, 8);
+                        string path_Old_Image = path_root + "\\Video\\" + oldVideoPath;
+                        System.IO.File.Delete(path_Old_Image);
+                    }
+                    FileName = uploadFileRepository.UplaodFile(displayArticle.Video, "\\Video\\");
+                    article.Video = @"~/video/" + FileName;
 
                 }
+                if ((displayArticle?.PDF?.Length > 0) && (displayArticle?.PDF?.ContentType == "application/pdf"))
+                {
+                    if (displayArticle.PDFPath == null)
+                    {
+
+                    }
+                    else
+                    {
+                        var oldPdfPath = displayArticle.PDFPath.Remove(0, 6);
+                        string path_Old_Image = path_root + "\\Pdf\\" + oldPdfPath;
+                        System.IO.File.Delete(path_Old_Image);
+
+
+                    }
+
+                    FileName = uploadFileRepository.UplaodFile(displayArticle.PDF, "\\Pdf\\");
+                    article.PDF = @"~/pdf/" + FileName;
+
+                }
+                articleRepository.Update(article);
+                    return RedirectToAction(nameof(ListArticle));
+              
+
+                
             }
             else
             {
@@ -430,7 +529,7 @@ namespace HelpDesk.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult UserList()
         {
-            var userlist = userManager.Users.Take(50).ToList();
+            var userlist = userManager.Users.Take(50).OrderByDescending(x=>x.Id).ToList();
             return View(userlist);
 
         }
