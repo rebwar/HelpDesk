@@ -1,15 +1,28 @@
-﻿<aside class="main-sidebar">
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@inject SignInManager<HelpDesk.MVC.Models.Users.ApplicationUsers> SignInManager
+@inject UserManager<HelpDesk.MVC.Models.Users.ApplicationUsers> UserManager
+@{
+    string UserId = UserManager.GetUserId(Context.User);
+    var user = UserManager.FindByIdAsync(UserId).Result;
+    string FullName = user.FirstName + "  " + user.LastName;
+    string ImagePath = user.ProfileImage;
+    IList<string> RolesBelongUser;
+    RolesBelongUser = UserManager.GetRolesAsync(user).Result;
 
+}
+
+<aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
 
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-right image">
-                <img src="~/Admin/img/rebwar.png" class="img-circle" alt="User Image">
+                <img src="~/Images/Profile/@ImagePath" class="img-circle" alt="User Image">
             </div>
             <div class="pull-right info">
-                <p>ریبوار حسین پوری</p>
+                <p> @FullName</p>
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
             </div>
@@ -20,16 +33,36 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">مدیریت وظایف</li>
+            @{
+                bool HasAdmin = false;
+                @foreach (var item in RolesBelongUser)
+                {
+                    if (item == "Admin")
+                    {
+                        HasAdmin = true;
+                    }
+                }
+                @if (HasAdmin)
+                {
+                    <li><a asp-action="ListCat" asp-controller="Admin"><i class="fa fa-chain"></i> <span> مدیریت گروه مقالات</span></a></li>
+
+                    <li><a asp-action="ListArticle" asp-controller="Admin"><i class="fa fa-book"></i> <span> مدیریت  مطالب</span></a></li>
+
+
+                    <li><a asp-action="UserList" asp-controller="Admin"><i class="fa fa-user"></i> <span> مدیریت  کاربران</span></a></li>
+                    <li><a asp-action="Roles" asp-controller="Admin"><i class="fa fa-user-secret"></i> <span> مدیریت  نقش ها</span></a></li>
+
+                    <li><a asp-action="Index" asp-controller="Home"><i class="fa fa-sitemap"></i> <span> بازگشت به صفحه اصلی</span></a></li>
+
+                }
+                else
+                {
+                    <li><a asp-action="ListArticle" asp-controller="Admin"><i class="fa fa-book"></i> <span> مدیریت  مطالب</span></a></li>
+                    <li><a asp-action="Index" asp-controller="Home"><i class="fa fa-sitemap"></i> <span> بازگشت به صفحه اصلی</span></a></li>
+
+                }
+            }
             <!-- Optionally, you can add icons to the links -->
-            <li><a asp-action="ListCat"><i class="fa fa-chain"></i> <span> مدیریت گروه مقالات</span></a></li>
-
-            <li><a asp-action="ListArticle"><i class="fa fa-book"></i> <span> مدیریت  مطالب</span></a></li>
-
-
-            <li><a asp-action="UserList"><i class="fa fa-user"></i> <span> مدیریت  کاربران</span></a></li>
-            <li><a asp-action="Roles"><i class="fa fa-user-secret"></i> <span> مدیریت  نقش ها</span></a></li>
-
-            <li><a asp-action="Index" asp-controller="Home"><i class="fa fa-sitemap"></i> <span> بازگشت به صفحه اصلی</span></a></li>
 
         </ul>
         <!-- /.sidebar-menu -->

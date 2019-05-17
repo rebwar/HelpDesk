@@ -15,6 +15,7 @@ namespace HelpDesk.Domain.Contracts.Articles
         List<Article> SearchArticle(string search);
         int GetVisitCount();
         List<Article> GetArticlesDesc();
+        List<Article> GetArticleByAuthor(int userId);
 
     }
 }

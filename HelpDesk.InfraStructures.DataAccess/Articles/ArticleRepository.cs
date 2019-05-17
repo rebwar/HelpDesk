@@ -16,6 +16,11 @@ namespace HelpDesk.InfraStructures.DataAccess.Articles
             this.context = dbcontext;
         }
 
+        public List<Article> GetArticleByAuthor(int userId)
+        {
+            return context.Articles.Where(c => c.AspNetUsersId == userId).ToList();
+        }
+
 
         public int GetArticlesCountInCategory(int id)
         {

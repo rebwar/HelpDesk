@@ -90,7 +90,6 @@ namespace HelpDesk.MVC.Controllers
             displayArticle.ResultArticle = article;
             //displayArticle.ResultArticle = model;
            displayArticle.Articles=articleRepository.GetAll().Take(2).ToList();
-
             return View(displayArticle);
         }
         public IActionResult Login()

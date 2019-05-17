@@ -27,7 +27,7 @@ namespace HelpDesk.InfraStructures.DataAccess.Migrations
                     b.Property<string>("Abstract")
                         .HasMaxLength(1000);
 
-                    b.Property<string>("AspNetUsersId");
+                    b.Property<int>("AspNetUsersId");
 
                     b.Property<string>("Body")
                         .IsRequired();

@@ -31,28 +31,17 @@
         @Html.Partial("_RightSideBar")
         <div class="content-wrapper">
             @RenderBody()
-
         </div>
-
         @Html.Partial("_Footer")
     </div>
-
-
-
     <script src="~/Admin/js/bootstrap.min.js"></script>
-
     <script src="~/Admin/js/fastclick.js"></script>
-
     <script src="~/Admin/js/adminlte.min.js"></script>
-
     <script src="~/vendor/jquery-validation/dist/jquery.validate.js"></script>
-
     <script src="~/vendor/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     @RenderSection("Details_Modal", false)
     @RenderSection("Edit_Modal", false)
     @RenderSection("Delete_Article", false)
 </body>
-
-
 </html>
 @RenderSection("PanelScripts", false)

@@ -52,13 +52,20 @@ namespace HelpDesk.MVC.Controllers
             this.imageRepository = imageRepository;
             this.userManager = userManager;
         }
+        public IList<string> RolesByUser(ApplicationUsers User)
+        {
+            return userManager.GetRolesAsync(User).Result;
+
+        }
         public IActionResult Index()
         {
             Statistics statistics = new Statistics();
+            string UserId = userManager.GetUserId(HttpContext.User);
+            statistics.User = userManager.FindByIdAsync(UserId).Result;
             statistics.Articles = articleRepository.GetStatistic();
             statistics.Users = userManager.Users.Count();
             statistics.PageVisited = articleRepository.GetVisitCount();
-            statistics.Categories = categoryRepository.GetStatistic();
+            statistics.Categories = categoryRepository.GetStatistic();           
             return View(statistics);
         }
         [Authorize(Roles = "Admin")]
@@ -107,8 +114,32 @@ namespace HelpDesk.MVC.Controllers
         }
         public IActionResult ListArticle()
         {
-            var article = articleRepository.GetAll().ToList();
-            return View(article);
+            string UserId = userManager.GetUserId(HttpContext.User);
+            UserRoleViewModel userRoleView = new UserRoleViewModel();
+            userRoleView.User = userManager.FindByIdAsync(UserId).Result;
+
+            IList<string> RolesBelongUser = RolesByUser(userRoleView.User);
+            bool HasUserAdmin = false;
+            foreach (var item in RolesBelongUser)
+            {
+                if(item=="Admin")
+                {
+                    HasUserAdmin = true;
+                }
+            }
+            if(HasUserAdmin)
+            {
+                var article = articleRepository.GetAll().ToList();
+                return View(article);
+
+            }
+            else
+            {
+                var article = articleRepository.GetArticleByAuthor(int.Parse(UserId)).ToList();
+                return View(article);
+
+            }
+
         }
         [Authorize(Roles = "Admin")]
         public IActionResult EditCategory(int id)
@@ -171,16 +202,19 @@ namespace HelpDesk.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var persiandate = new PersianDateTime(DateTime.Now);
+                string UserId = userManager.GetUserId(HttpContext.User);
                 Article article = new Article
                 {
                     Title = model.Title,
                     Abstract = model.Abstract,
                     Body = model.Body,
                     PublishDate = persiandate.ToString(),
-                    Status = ArticleStatus.Publish,
+                    Status = ArticleStatus.PrePublish,
                     CategoryId = model.SelectedCat,
                     Likes = 0,
-                    ViewCount = 0
+                    ViewCount = 0,
+                    AspNetUsersId=int.Parse(UserId)
+                    
 
                 };
                 string FileName = "";
