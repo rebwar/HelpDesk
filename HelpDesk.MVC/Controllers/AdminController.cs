@@ -141,7 +141,6 @@ namespace HelpDesk.MVC.Controllers
             string UserId = userManager.GetUserId(HttpContext.User);
             UserRoleViewModel userRoleView = new UserRoleViewModel();
             userRoleView.User = userManager.FindByIdAsync(UserId).Result;
-
             IList<string> RolesBelongUser = RolesByUser(userRoleView.User);
             bool HasUserAdmin = false;
             foreach (var item in RolesBelongUser)
@@ -161,9 +160,7 @@ namespace HelpDesk.MVC.Controllers
             {
                 var article = articleRepository.GetArticleByAuthor(int.Parse(UserId)).ToList();
                 return View(article);
-
             }
-
         }
         [Authorize(Roles = "Admin")]
         public IActionResult EditCategory(int id)
@@ -340,12 +337,15 @@ namespace HelpDesk.MVC.Controllers
                 displayArticleCategory.Status = article.Status;
                 displayArticleCategory.Title = article.Title;
                 displayArticleCategory.AspNetUsersId = article.AspNetUsersId;
-                
+                displayArticleCategory.ImagePath = article.Image;
+                displayArticleCategory.VideoPath = article.Video;
+                displayArticleCategory.PDFPath = article.PDF;
                 return View(displayArticleCategory);
             }
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [DisableRequestSizeLimit]
         public IActionResult EditArticle(AddNewArticleGetViewModel displayArticle, Article article)
         {
             if (ModelState.IsValid)

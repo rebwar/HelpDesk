@@ -10,7 +10,6 @@
     IList<string> RolesBelongUser;
     RolesBelongUser = UserManager.GetRolesAsync(user).Result;
 
-
     ViewData["Title"] = "ListArticle";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
