@@ -1,0 +1,120 @@
+@page
+@model HelpDesk.Pages.ImageBrowserModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<html>
+<head>
+    <title>انتخاب عکس</title>
+    <style type="text/css">
+
+        body {
+            margin: 0px;
+        }
+
+        form {
+            width: 750px;
+            background-color: #E3E3C7;
+        }
+
+        h1 {
+            padding: 15px;
+            margin: 0px;
+            padding-bottom: 0px;
+            font-family: Arial;
+            font-size: 14pt;
+            color: #737357;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <div>
+            <h1>انتخاب عکس</h1>
+
+            <table border="1" style="background-color:#F1F1E3; margin:15px; width: 720px; border-spacing: 0px;">
+                <tr>
+                    <td style="width: 396px; vertical-align: middle; text-align: center; padding: 10px;">
+                        <img src="@(Model.ImageUrl)" style="max-height: 450px; max-width: 380px;">
+                        <input type="hidden" asp-for="ImageUrl" />
+                    </td>
+                    <td style="width: 324px; vertical-align: top; padding: 10px;">
+
+
+                        <input id="changeDirectory" type="submit" asp-page-handler="ChangeDirectory" style="display:none;" />
+
+                        <input type="hidden" asp-for="NewDirectoryName" />
+
+                        <br /><br />
+                        <div>
+                            <br />
+                            <input type="text" asp-for="SearchTerms" />
+                            <input type="submit" asp-page-handler="Search" value="جستجو" />
+                            <br />
+                        </div>
+                        <select id="imageList" asp-for="ImageListValue" asp-items="Model.ImageList" size="12" onchange="document.getElementById('selectImage').click()" style="width: 280px; height: 180px;"></select>
+                        <input id="selectImage" type="submit" asp-page-handler="SelectImage" style="display: none;" />
+                        <input id="newImageName" type="hidden" asp-for="NewImageName" />
+
+                        <input type="submit" asp-page-handler="DeleteImage" value="حذف عکس" disabled="@(!Model.IsImageBtnsEnabled ? "disabled" : null)" onclick="return confirm('Are you sure you want to delete this image?');" />
+                        <br />
+                        <br />
+                        Resize:<br />
+                        <input id="ResizeWidth" type="text" asp-for="ResizeWidth" disabled="@(!Model.IsImageBtnsEnabled ? "disabled" : null)" onchange="maintainRatio(true, this.value)" style="width: 50px;" />
+                        x
+                        <input id="ResizeHeight" type="text" asp-for="ResizeHeight" disabled="@(!Model.IsImageBtnsEnabled ? "disabled" : null)" onchange="maintainRatio(false, this.value)" style="width: 50px;" />
+                        <input type="submit" value="تغییر اندازه عکس" asp-page-handler="ResizeImage" disabled="@(!Model.IsImageBtnsEnabled ? "disabled" : null)" /><br />
+                        <div style="color: red;">@(Model.ResizeMessage)</div>
+                        <br /><br />
+                        Upload Image: (10 MB max)
+                        <input type="file" asp-for="UploadedImageFile" />
+                        <input type="submit" asp-page-handler="Upload" style="background-color:lightblue; border-radius:4px;" value="آپلود" /><br />
+                        <br />
+                    </td>
+                </tr>
+            </table>
+
+            <div style="text-align: center;">
+                <input type="submit" value="استفاده از عکس" class="btn btn-success" asp-page-handler="Clear" onclick="ok()" />
+                <input type="submit" value="برگشت" class="btn btn-danger" asp-page-handler="Clear" onclick="closeDialog()" />
+                <br /><br />
+            </div>
+        </div>
+    </form>
+    <script>
+		document.getElementById("imageList").focus();
+
+		function newDirectory() {
+			var name = prompt('Enter name of folder:');
+			if (name == null || name == '') {
+				return false;
+			}
+			document.getElementById('NewDirectoryName').value = name;
+			return true;
+		}
+
+		function maintainRatio(isWidth, value) {
+			var ratio = @(Model.ImageAspectRatio);
+			var field = document.getElementById(isWidth ? 'ResizeHeight' : 'ResizeWidth');
+			field.value = isWidth ? parseInt(value / ratio) : parseInt(value * ratio);
+		}
+
+		function renameImage() {
+			var name = prompt('Enter new filename:','@(Model.ImageListValue)');
+			if (name == null || name == '')
+				return false;
+			document.getElementById('newImageName').value = name;
+			return true;
+		}
+
+		function ok() {
+			var dialog = window.top.opener.CKEDITOR.dialog.getCurrent();
+			dialog.setValueOf('info', 'txtUrl', encodeURI('@(Model.ImageUrl)'));
+			closeDialog();
+		}
+
+		function closeDialog() {
+			window.top.close();
+			window.top.opener.focus();
+		}
+    </script>
+</body>
+</html>

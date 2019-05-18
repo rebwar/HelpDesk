@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\ImageBrowser.cshtml" />
+    <None Include="Pages\LinkBrowser.cshtml" />
     <None Include="wwwroot\Home\js\script.js" />
     <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Bold.woff2" />
     <None Include="wwwroot\Home\style\fonts\woff2\Vazir-Light.woff2" />
